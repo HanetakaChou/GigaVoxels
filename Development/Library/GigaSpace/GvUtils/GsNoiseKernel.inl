@@ -47,7 +47,7 @@
 //#include "GvUtils/GsNoise.h"
 
 // Cuda
-#include <math_functions.h>
+#include <cuda_runtime.h>
 
 /******************************************************************************
  ****************************** INLINE DEFINITION *****************************

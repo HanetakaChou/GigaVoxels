@@ -7,12 +7,12 @@
 // File    : test/gtx/simd-mat4.cpp
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/quaternion.hpp>
-#include <glm/gtc/random.hpp>
-#include <glm/gtx/simd_vec4.hpp>
-#include <glm/gtx/simd_mat4.hpp>
+#include <gsglm/glm.hpp>
+#include <gsglm/gtc/matrix_transform.hpp>
+#include <gsglm/gtc/quaternion.hpp>
+#include <gsglm/gtc/random.hpp>
+#include <gsglm/gtx/simd_vec4.hpp>
+#include <gsglm/gtx/simd_mat4.hpp>
 #include <iostream>
 #include <cstdio>
 #include <ctime>

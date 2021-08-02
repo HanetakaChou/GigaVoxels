@@ -7,10 +7,10 @@
 // File    : test/core/func_packing.cpp
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-#include <glm/glm.hpp>
-#include <glm/gtc/half_float.hpp>
-#include <glm/gtc/type_precision.hpp>
-#include <glm/gtc/epsilon.hpp>
+#include <gsglm/glm.hpp>
+#include <gsglm/gtc/half_float.hpp>
+#include <gsglm/gtc/type_precision.hpp>
+#include <gsglm/gtc/epsilon.hpp>
 #include <vector>
 
 int test_packUnorm2x16()

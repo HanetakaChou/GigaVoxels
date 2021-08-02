@@ -7,8 +7,8 @@
 // File    : test/gtx/matrix_query.cpp
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-#include <glm/glm.hpp>
-#include <glm/gtx/matrix_query.hpp>
+#include <gsglm/glm.hpp>
+#include <gsglm/gtx/matrix_query.hpp>
 
 int test_isNull()
 {

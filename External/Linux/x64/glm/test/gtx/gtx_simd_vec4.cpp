@@ -7,8 +7,8 @@
 // File    : test/gtx/simd-vec4.cpp
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-#include <glm/glm.hpp>
-#include <glm/gtx/simd_vec4.hpp>
+#include <gsglm/glm.hpp>
+#include <gsglm/gtx/simd_vec4.hpp>
 #include <cstdio>
 
 #if(GLM_ARCH != GLM_ARCH_PURE)

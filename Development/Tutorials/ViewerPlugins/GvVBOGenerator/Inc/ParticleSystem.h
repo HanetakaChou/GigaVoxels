@@ -50,7 +50,7 @@
 #include <GvCore/GsVectorTypesExt.h>
 
 // GL
-#include <GL/glew.h>
+#include <GsGL/glew.h>
 
 // Cuda
 #include <vector_types.h>

@@ -4,9 +4,9 @@
 
 project (GvDicomVoxelizer)
 
-MESSAGE (STATUS "")
-MESSAGE (STATUS "PROJECT : ${PROJECT_NAME}")
-MESSAGE (STATUS "")
+
+
+
 
 # Tell CMake to first search in directories listed in CMAKE_MODULE_PATH when 
 # using FIND_PACKAGE() or INCLUDE()

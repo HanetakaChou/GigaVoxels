@@ -7,8 +7,8 @@
 // File    : test/gtx/matrix_interpolation.cpp
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-#include <glm/glm.hpp>
-#include <glm/gtx/matrix_interpolation.hpp>
+#include <gsglm/glm.hpp>
+#include <gsglm/gtx/matrix_interpolation.hpp>
 
 int main()
 {

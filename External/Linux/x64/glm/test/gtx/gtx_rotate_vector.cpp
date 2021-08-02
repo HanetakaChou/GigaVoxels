@@ -7,8 +7,8 @@
 // File    : test/gtx/rotate_vector.cpp
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-#include <glm/glm.hpp>
-#include <glm/gtx/rotate_vector.hpp>
+#include <gsglm/glm.hpp>
+#include <gsglm/gtx/rotate_vector.hpp>
 
 int test_rotate()
 {

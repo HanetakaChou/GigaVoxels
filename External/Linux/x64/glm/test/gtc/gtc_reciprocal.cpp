@@ -7,8 +7,8 @@
 // File    : test/gtc/reciprocal.cpp
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-#include <glm/glm.hpp>
-#include <glm/gtc/reciprocal.hpp>
+#include <gsglm/glm.hpp>
+#include <gsglm/gtc/reciprocal.hpp>
 
 int main()
 {

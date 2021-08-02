@@ -7,8 +7,8 @@
 // File    : test/gtx/string_cast.cpp
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-#include <glm/glm.hpp>
-#include <glm/gtx/string_cast.hpp>
+#include <gsglm/glm.hpp>
+#include <gsglm/gtx/string_cast.hpp>
 #include <iostream>
 #include <limits>
 

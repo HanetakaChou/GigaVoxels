@@ -626,7 +626,7 @@ inline GsOracleRegionInfo::OracleRegionInfo ProducerKernel< TDataStructureType >
 	bool isEmpty = true;
 
 	// Since we work in the range [-1;1] below, the brick size is two time bigger
-	float brickSize = ( 1.f / (float)( 1 << regionDepth )) * 2.f;
+	// float brickSize = ( 1.f / (float)( 1 << regionDepth )) * 2.f;
 
 	// Iterate through voxels
 	for ( elemOffset.z = 0; elemOffset.z < elemSize.z && isEmpty; elemOffset.z++ )

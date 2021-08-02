@@ -181,9 +181,9 @@ void RendererCUDA< TDataStructureType, TDataProductionManagerType, TShaderType >
 	viewSurfaceVS[ 0 ] = make_float2( fleft, fbottom );
 	viewSurfaceVS[ 1 ] = make_float2( fright, ftop );
 
-	float3 viewPlane[ 2 ];
-	viewPlane[ 0 ] = make_float3( fleft, fbottom, fnear );
-	viewPlane[ 1 ] = make_float3( fright, ftop, fnear );
+	// float3 viewPlane[ 2 ];
+	// viewPlane[ 0 ] = make_float3( fleft, fbottom, fnear );
+	// viewPlane[ 1 ] = make_float3( fright, ftop, fnear );
 	// float3 viewSize = ( viewPlane[ 1 ] - viewPlane[ 0 ] );
 
 	// Projected 2D Bounding Box of the GigaVoxels 3D BBox.
@@ -336,6 +336,8 @@ bool RendererCUDA< TDataStructureType, TDataProductionManagerType, TShaderType >
 
 	GS_CUDA_SAFE_CALL( cudaGraphicsGLRegisterImage( &_rayMinResource, _proxyGeometry->_depthMinTex, GL_TEXTURE_RECTANGLE, cudaGraphicsRegisterFlagsReadOnly ) );
 	GS_CUDA_SAFE_CALL( cudaGraphicsGLRegisterImage( &_rayMaxResource, _proxyGeometry->_depthMaxTex, GL_TEXTURE_RECTANGLE, cudaGraphicsRegisterFlagsReadOnly ) );
+
+	return true;
 }
 	
 /******************************************************************************
@@ -356,6 +358,8 @@ bool RendererCUDA< TDataStructureType, TDataProductionManagerType, TShaderType >
 	{
 		GS_CUDA_SAFE_CALL( cudaGraphicsUnregisterResource( _rayMaxResource ) );
 	}
+
+	return true;
 }
 
 /******************************************************************************

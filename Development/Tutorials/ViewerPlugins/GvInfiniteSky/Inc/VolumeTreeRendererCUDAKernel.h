@@ -176,7 +176,7 @@ void renderVolTree_Std( VolTreeKernelType& pDataStructure, SampleShaderType& pSh
 	CUDAPM_KERNEL_START_EVENT( pPixelCoords, 5 );
 	float3 rayDirTree = pRayDirTree;
 	float3 rayStartTree = pRayStartTree;
-	float epsilon = 1e-3;
+	// float epsilon = 1e-3;
 
 	// Keep root node in cache
 	pCache._nodeCacheManager.setElementUsage( 0 );
@@ -305,9 +305,9 @@ void renderVolTree_Std( VolTreeKernelType& pDataStructure, SampleShaderType& pSh
 			// PASCAL
 			// This is used to stop the ray with a z-depth value smaller than the remaining brick ray length
 			//
-			// QUESTION : pas forcément, si objet qui cache est transparent !??
+			// QUESTION : pas forcï¿½ment, si objet qui cache est transparent !??
 			// => non, comme d'hab en OpenGL => dessiner d'abord les objets opaques
-			const float rayLengthInBrick =rayLengthInNodeTree;// mincc( rayLengthInNodeTree, ptMaxTree - (ptTree-offsetPtree) );	// ==> attention, ( ptMaxTree - ptTree < 0 ) ?? ==> non, à casue du test du WHILE !! c'est OK !!
+			const float rayLengthInBrick =rayLengthInNodeTree;// mincc( rayLengthInNodeTree, ptMaxTree - (ptTree-offsetPtree) );	// ==> attention, ( ptMaxTree - ptTree < 0 ) ?? ==> non, ï¿½ casue du test du WHILE !! c'est OK !!
 
 			// This is where shader program occurs
 			float dt = ::rendererBrickSampling< TFastUpdateMode, TPriorityOnBrick >
@@ -597,7 +597,7 @@ void RenderKernelSimple( TVolTreeKernelType pVolumeTree, TCacheType pCache )
 		//float3 rayDirInWorld = normalize( pixelVecWP );
 
 		//// Transform the ray from World to Tree Space
-		//rayStartInTree = mul( k_renderViewContext.invModelMatrix, rayStartInWorld );	// ce terme pourrait/devrait être calculé sur le HOST car il est constant...
+		//rayStartInTree = mul( k_renderViewContext.invModelMatrix, rayStartInWorld );	// ce terme pourrait/devrait ï¿½tre calculï¿½ sur le HOST car il est constant...
 		//
 		//// Beware, vectors and transformed by inverse transpose...
 		//// TO DO : do correction
@@ -666,7 +666,7 @@ void RenderKernelSimple( TVolTreeKernelType pVolumeTree, TCacheType pCache )
 			pixelColorF.x = __saturatef( pixelColorF.x );
 			pixelColorF.y = __saturatef( pixelColorF.y );
 			pixelColorF.z = __saturatef( pixelColorF.z );
-			pixelColorF.w = 1.0f;		// <== why 1.0f and not __saturatef( pixelColorF.w ) ?	// Pour éviter une opération OpenGL de ROP ? Car ça a été penser pour rendre en dernier au départ ?
+			pixelColorF.w = 1.0f;		// <== why 1.0f and not __saturatef( pixelColorF.w ) ?	// Pour ï¿½viter une opï¿½ration OpenGL de ROP ? Car ï¿½a a ï¿½tï¿½ penser pour rendre en dernier au dï¿½part ?
 			//pixelColorF.w = __saturatef( pixelColorF.w );
 			
 			// Convert color from float [ 0.0 ; 1.0 ] to uchar [ 0 ; 255 ]

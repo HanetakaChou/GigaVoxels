@@ -51,7 +51,7 @@
 #include "GvCore/GsVectorTypesExt.h"
 
 // OpenGL
-#include <GL/glew.h>
+#include <GsGL/glew.h>
 
 /******************************************************************************
  ************************* DEFINE AND CONSTANT SECTION ************************

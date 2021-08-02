@@ -119,11 +119,11 @@ ifneq ($(STRIP),)
 	$(STRIP) -x $@
 endif
 
-tmp/$(SYSTEM)/default/static/glew.o: src/glew.c include/GL/glew.h include/GL/wglew.h include/GL/glxew.h
+tmp/$(SYSTEM)/default/static/glew.o: src/glew.c include/GsGL/glew.h include/GsGL/wglew.h include/GsGL/glxew.h
 	@mkdir -p $(dir $@)
 	$(CC) -DGLEW_NO_GLU -DGLEW_STATIC $(CFLAGS) $(CFLAGS.SO) -o $@ -c $<
 
-tmp/$(SYSTEM)/default/shared/glew.o: src/glew.c include/GL/glew.h include/GL/wglew.h include/GL/glxew.h
+tmp/$(SYSTEM)/default/shared/glew.o: src/glew.c include/GsGL/glew.h include/GsGL/wglew.h include/GsGL/glxew.h
 	@mkdir -p $(dir $@)
 	$(CC) -DGLEW_NO_GLU -DGLEW_BUILD $(CFLAGS) $(CFLAGS.SO) -o $@ -c $<
 
@@ -160,11 +160,11 @@ ifneq ($(STRIP),)
 	$(STRIP) -x $@
 endif
 
-tmp/$(SYSTEM)/mx/static/glew.o: src/glew.c include/GL/glew.h include/GL/wglew.h include/GL/glxew.h
+tmp/$(SYSTEM)/mx/static/glew.o: src/glew.c include/GsGL/glew.h include/GsGL/wglew.h include/GsGL/glxew.h
 	@mkdir -p $(dir $@)
 	$(CC) -DGLEW_NO_GLU -DGLEW_MX -DGLEW_STATIC $(CFLAGS) $(CFLAGS.SO) -o $@ -c $<
 
-tmp/$(SYSTEM)/mx/shared/glew.o: src/glew.c include/GL/glew.h include/GL/wglew.h include/GL/glxew.h
+tmp/$(SYSTEM)/mx/shared/glew.o: src/glew.c include/GsGL/glew.h include/GsGL/wglew.h include/GsGL/glxew.h
 	@mkdir -p $(dir $@)
 	$(CC) -DGLEW_NO_GLU -DGLEW_MX -DGLEW_BUILD $(CFLAGS) $(CFLAGS.SO) -o $@ -c $<
 
@@ -221,11 +221,11 @@ ifneq ($(STRIP),)
 	$(STRIP) -x $@
 endif
 
-$(GLEWINFO.BIN.OBJ): $(GLEWINFO.BIN.SRC) include/GL/glew.h include/GL/wglew.h include/GL/glxew.h
+$(GLEWINFO.BIN.OBJ): $(GLEWINFO.BIN.SRC) include/GsGL/glew.h include/GsGL/wglew.h include/GsGL/glxew.h
 	@mkdir -p $(dir $@)
 	$(CC) -DGLEW_NO_GLU $(CFLAGS) $(CFLAGS.SO) -o $@ -c $<
 
-$(VISUALINFO.BIN.OBJ): $(VISUALINFO.BIN.SRC) include/GL/glew.h include/GL/wglew.h include/GL/glxew.h
+$(VISUALINFO.BIN.OBJ): $(VISUALINFO.BIN.SRC) include/GsGL/glew.h include/GsGL/wglew.h include/GsGL/glxew.h
 	@mkdir -p $(dir $@)
 	$(CC) -DGLEW_NO_GLU $(CFLAGS) $(CFLAGS.SO) -o $@ -c $<
 
@@ -286,9 +286,9 @@ install.bin: glew.bin
 
 install.include:
 	$(INSTALL) -d -m 0755 "$(DESTDIR)$(INCDIR)"
-	$(INSTALL) -m 0644 include/GL/wglew.h "$(DESTDIR)$(INCDIR)/"
-	$(INSTALL) -m 0644 include/GL/glew.h "$(DESTDIR)$(INCDIR)/"
-	$(INSTALL) -m 0644 include/GL/glxew.h "$(DESTDIR)$(INCDIR)/"
+	$(INSTALL) -m 0644 include/GsGL/wglew.h "$(DESTDIR)$(INCDIR)/"
+	$(INSTALL) -m 0644 include/GsGL/glew.h "$(DESTDIR)$(INCDIR)/"
+	$(INSTALL) -m 0644 include/GsGL/glxew.h "$(DESTDIR)$(INCDIR)/"
 
 install.pkgconfig: glew.pc
 	$(INSTALL) -d -m 0755 "$(DESTDIR)$(LIBDIR)"

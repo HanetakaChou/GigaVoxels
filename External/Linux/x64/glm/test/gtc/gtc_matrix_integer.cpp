@@ -7,8 +7,8 @@
 // File    : test/gtc/matrix_integer.cpp
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_integer.hpp>
+#include <gsglm/glm.hpp>
+#include <gsglm/gtc/matrix_integer.hpp>
 
 int main()
 {

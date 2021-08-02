@@ -52,7 +52,7 @@
 
 // Cuda
 #include <vector_types.h>
-#include <host_defines.h>
+#include <cuda_runtime.h>
 
 /******************************************************************************
  ************************* DEFINE AND CONSTANT SECTION ************************

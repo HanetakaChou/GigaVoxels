@@ -7,8 +7,8 @@
 // File    : test/gtc/type_ptr.cpp
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-#include <glm/glm.hpp>
-#include <glm/gtc/type_ptr.hpp>
+#include <gsglm/glm.hpp>
+#include <gsglm/gtc/type_ptr.hpp>
 
 int test_value_ptr_vec()
 {

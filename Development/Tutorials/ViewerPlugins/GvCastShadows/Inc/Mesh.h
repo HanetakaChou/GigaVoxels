@@ -32,7 +32,7 @@
 #include <assimp/postprocess.h> // Post processing flags
 
 // GL
-#include <GL/glew.h>
+#include <GsGL/glew.h>
 
 // Qt
 #include <QDir>

@@ -11,7 +11,7 @@
 #ifndef _CUBE_MAP_H_
 #define _CUBE_MAP_H_
 #include <QImage>
-#include <GL/glew.h>
+#include <GsGL/glew.h>
 #include <string>
 #include <iostream>
 #include <fstream>

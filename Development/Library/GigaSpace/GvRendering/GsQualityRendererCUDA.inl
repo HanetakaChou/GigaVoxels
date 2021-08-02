@@ -616,16 +616,16 @@ bool GsQualityRendererCUDA< TVolumeTreeType, TVolumeTreeCacheType, TSampleShader
 			switch ( graphicsResourceSlot )
 			{
 				case GsGraphicsInteroperabiltyHandler::eColorReadSlot:
-					cudaBindTextureToArray( GvRendering::_inputColorTexture, imageArray );
+					GS_CUDA_SAFE_CALL(cudaBindTextureToArray( GvRendering::_inputColorTexture, imageArray ));
 					break;
 
 				case GsGraphicsInteroperabiltyHandler::eColorWriteSlot:
 				case GsGraphicsInteroperabiltyHandler::eColorReadWriteSlot:
-					cudaBindSurfaceToArray( GvRendering::_colorSurface, imageArray );
+					GS_CUDA_SAFE_CALL(cudaBindSurfaceToArray( GvRendering::_colorSurface, imageArray ));
 					break;
 
 				case GsGraphicsInteroperabiltyHandler::eDepthReadSlot:
-					cudaBindTextureToArray( GvRendering::_inputDepthTexture, imageArray );
+					GS_CUDA_SAFE_CALL(cudaBindTextureToArray( GvRendering::_inputDepthTexture, imageArray ));
 					break;
 
 				case GsGraphicsInteroperabiltyHandler::eDepthWriteSlot:
@@ -640,7 +640,7 @@ bool GsQualityRendererCUDA< TVolumeTreeType, TVolumeTreeCacheType, TSampleShader
 		}
 	}
 
-	return false;
+	return true;
 }
 
 /******************************************************************************
@@ -676,7 +676,7 @@ bool GsQualityRendererCUDA< TVolumeTreeType, TVolumeTreeCacheType, TSampleShader
 			switch ( graphicsResourceSlot )
 			{
 				case GsGraphicsInteroperabiltyHandler::eColorReadSlot:
-					cudaUnbindTexture( GvRendering::_inputColorTexture );
+					GS_CUDA_SAFE_CALL(cudaUnbindTexture( GvRendering::_inputColorTexture ));
 					break;
 
 				case GsGraphicsInteroperabiltyHandler::eColorWriteSlot:
@@ -685,7 +685,7 @@ bool GsQualityRendererCUDA< TVolumeTreeType, TVolumeTreeCacheType, TSampleShader
 					break;
 
 				case GsGraphicsInteroperabiltyHandler::eDepthReadSlot:
-					cudaUnbindTexture( GvRendering::_inputDepthTexture );
+					GS_CUDA_SAFE_CALL(cudaUnbindTexture( GvRendering::_inputDepthTexture ));
 					break;
 
 				case GsGraphicsInteroperabiltyHandler::eDepthWriteSlot:
@@ -700,7 +700,7 @@ bool GsQualityRendererCUDA< TVolumeTreeType, TVolumeTreeCacheType, TSampleShader
 		}
 	}
 
-	return false;
+	return true;
 }
 
 } // namespace GvRendering

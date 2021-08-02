@@ -23,7 +23,7 @@
 #include "GvvGuiConfig.h"
 
 // Qt
-#include <QtCore/QObject>
+#include <QObject>
 
 /******************************************************************************
  ************************* DEFINE AND CONSTANT SECTION ************************

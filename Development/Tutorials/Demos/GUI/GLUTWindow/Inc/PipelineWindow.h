@@ -47,7 +47,7 @@
  ******************************************************************************/
 
 // OpenGL
-#include <GL/glew.h>
+#include <GsGL/glew.h>
 
 // Project
 #include "PipelineGLUTWindowInterface.h"

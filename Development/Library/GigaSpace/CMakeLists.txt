@@ -24,8 +24,8 @@ SET (GV_TARGET_TYPE "GV_SHARED_LIB")
 INCLUDE_DIRECTORIES (${CMAKE_SOURCE_DIR}/GigaSpace)
 
 # GigaSpace library
-SET (gigaspaceLib "GsGraphics" "GsCompute")
-INCLUDE (GigaVoxels_CMakeImport)
+SET (projectLibList "GsGraphics" "GsCompute")
+INCLUDE (Project_CMakeImport)
 
 # Add GigaSpace - main third party - dependencies LINK directory
 #LINK_DIRECTORIES (${GV_EXTERNAL}/lib)
@@ -70,4 +70,4 @@ endif()
 # Main CMake file used for project generation
 #----------------------------------------------------------------
 
-INCLUDE (GV_CMakeCommon)
+INCLUDE (GV_CMakeCommonLibrary)

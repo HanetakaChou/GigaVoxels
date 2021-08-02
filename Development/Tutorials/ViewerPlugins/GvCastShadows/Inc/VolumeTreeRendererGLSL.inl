@@ -713,7 +713,7 @@ bool VolumeTreeRendererGLSL< TVolumeTreeType, TVolumeTreeCacheType, TSampleShade
 		}
 	}
 
-	return false;
+	return true;
 }
 
 /******************************************************************************
@@ -773,5 +773,5 @@ bool VolumeTreeRendererGLSL< TVolumeTreeType, TVolumeTreeCacheType, TSampleShade
 		}
 	}
 
-	return false;
+	return true;
 }

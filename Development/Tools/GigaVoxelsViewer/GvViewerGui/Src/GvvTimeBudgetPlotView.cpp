@@ -25,7 +25,7 @@
 #include <QFont>
 
 // Qwt
-#define GS_QWT_6_0
+// #define GS_QWT_6_0
 #include <qwt_plot_picker.h>
 #include <qwt_plot_layout.h>
 #include <qwt_dyngrid_layout.h>

@@ -7,8 +7,8 @@
 // File    : test/gtc/noise.cpp
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-#include <glm/glm.hpp>
-#include <glm/gtc/noise.hpp>
+#include <gsglm/glm.hpp>
+#include <gsglm/gtc/noise.hpp>
 #include <gli/gli.hpp>
 #include <gli/gtx/loader.hpp>
 #include <iostream>

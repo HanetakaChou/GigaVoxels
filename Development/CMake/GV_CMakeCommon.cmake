@@ -2,124 +2,53 @@
 # PROJECT common CMake file
 #----------------------------------------------------------------
 
-message (STATUS "")
-message (STATUS "PROJECT : ${PROJECT_NAME}")
 
-# Set the build types.
-# Supports Debug, Release, MinSizeRel, and RelWithDebInfo, anything else will be ignored.
-set (CMAKE_BUILD_TYPES Debug Release)
-set (CMAKE_CONFIGURATION_TYPES "${CMAKE_BUILD_TYPES}" CACHE STRING "" FORCE)
-mark_as_advanced (CMAKE_CONFIGURATION_TYPES)
 
-set (BUILD_TYPELIST "${CMAKE_BUILD_TYPES}" CACHE STRING "" FORCE)
-
+# LIBRARY_PATH
 set (LIBRARY_PATH ${CMAKE_CURRENT_BINARY_DIR})
 file (TO_NATIVE_PATH ${LIBRARY_PATH} LIBRARY_PATH)
 
-# set (EXECUTABLE_OUTPUT_PATH ${LIBRARY_PATH})
-# set (LIBRARY_OUTPUT_PATH ${LIBRARY_PATH})
-
-#--------------------
-#--------------------
-#MESSAGE (STATUS "LIBRARY_PATH : ${LIBRARY_PATH}")
-#--------------------
-#--------------------
+# CXX_STANDARD_LIBRARIES
+SET (CMAKE_CXX_STANDARD_LIBRARIES "")
 
 #-----------------------------------------------
 # Defines files lists
 #-----------------------------------------------
-
-#add_subdirectory ("${CMAKE_SOURCE_DIR}/API/Core")
-
-#FILE(GLOB myincList "${CMAKE_SOURCE_DIR}/API/Core/Inc/*.h*")
-#FILE(GLOB myinlList "${CMAKE_SOURCE_DIR}/API/Core/Inc/*.inl")
-#FILE(GLOB mysrcList "${CMAKE_SOURCE_DIR}/API/Core/Src/*.c*")
-
-#source_group ("Core\\Inc" FILES ${myincList})
-#source_group ("Core\\Inl" FILES ${myinlList})
-#source_group ("Core\\Src" FILES ${mysrcList})
-
-#-----------------------------------------------
-# Declare a macro to define subgroups for source files
-# in Visual Studio by filtering them uppon filenames
-#-----------------------------------------------
-
-#-- Macro used to add subgroups
-MACRO (BUILD_GROUP package)
-file (GLOB incList "${CMAKE_SOURCE_DIR}/GigaSpace/${package}/*.h*")
-file (GLOB inlList "${CMAKE_SOURCE_DIR}/GigaSpace/${package}/*.inl")
-file (GLOB srcList "${CMAKE_SOURCE_DIR}/GigaSpace/${package}/*.c*")
-file (GLOB glslList "${CMAKE_SOURCE_DIR}/GigaSpace/${package}/*.*glsl*")
-source_group ("${package}\\Inc" FILES ${incList})
-source_group ("${package}\\Inl" FILES ${inlList})
-source_group ("${package}\\Src" FILES ${srcList})
-source_group ("${package}\\Res" FILES ${glslList})
-ENDMACRO (BUILD_GROUP)
-
-#-- Add subgroups
-BUILD_GROUP(GvCore)
-BUILD_GROUP(GvStructure)
-BUILD_GROUP(GvCache)
-BUILD_GROUP(GvRendering)
-BUILD_GROUP(GvUtils)
-BUILD_GROUP(GvPerfMon)
-BUILD_GROUP(GvVoxelizer)
-
-#-- Macro used to add subgroups
-MACRO( BUILD_PACKAGE package component )
-file (GLOB incList "${CMAKE_SOURCE_DIR}/${package}/${component}/*.h*")
-file (GLOB inlList "${CMAKE_SOURCE_DIR}/${package}/${component}/*.inl")
-file (GLOB srcList "${CMAKE_SOURCE_DIR}/${package}/${component}/*.c*")
-file (GLOB glslList "${CMAKE_SOURCE_DIR}/${package}/${component}/Res/*.*glsl*")
-source_group ("Inc" FILES ${incList})
-source_group ("Inl" FILES ${inlList})
-source_group ("Src" FILES ${srcList})
-source_group ("Res" FILES ${glslList})
-ENDMACRO( BUILD_PACKAGE )
-BUILD_PACKAGE( GsGraphics GsGraphics )
-BUILD_PACKAGE( GsCompute GsCompute )
 
 FILE (GLOB_RECURSE incList "*.h*")
 FILE (GLOB_RECURSE inlList "*.inl")
 FILE (GLOB_RECURSE cppList "*.cpp")
 FILE (GLOB_RECURSE cList "*.c")
 FILE (GLOB_RECURSE cuList "*.cu")
-FILE (GLOB_RECURSE glslList "*.*glsl")
+FILE (GLOB_RECURSE uiList "*.ui")
+FILE (GLOB_RECURSE rcList "*.qrc")
 
 SET (srcList ${cppList} ${cList} ${cuList})
-
-#-----------------------------------------------
-# Manage Visual studio group files 
-#-----------------------------------------------
-
-#source_group (Inc FILES ${incList})
-#source_group (Inl FILES ${inlList})
-#source_group (Src FILES ${srcList})
-
 
 #-----------------------------------------------
 # Manage generated files 
 #-----------------------------------------------
 
-# Add the header files to the project (only for Win32???)
-#INCLUDE_DIRECTORIES ( ${CMAKE_CURRENT_SOURCE_DIR}/Inc/)
-SET (resList ${resList} ${incList})
-SET (resList ${resList} ${inlList})
-SET (resList ${resList} ${glslList})
+SET (moclist)
+FOREACH (it ${incList})
+	GET_FILENAME_COMPONENT(infile ${it} ABSOLUTE)
+	FILE(READ ${infile} _contents)
+	STRING(REGEX MATCH "Q_OBJECT" _match "${_contents}")
+	IF(NOT ("${_match}" STREQUAL "") )
+		LIST(APPEND moclist ${it})	
+	ENDIF(NOT ("${_match}" STREQUAL "") )
+ENDFOREACH (it)
 
-
-#-----------------------------------------------
-# Manage Win32 definitions
-#-----------------------------------------------
-if (WIN32)
-	ADD_DEFINITIONS (-DWIN32 -D_WINDOWS)
-	if (NOT USE_FULL_WIN32_H)
-		ADD_DEFINITIONS (-DWIN32_LEAN_AND_MEAN)
-	endif (NOT USE_FULL_WIN32_H)
-endif (WIN32)
-
-SET (CMAKE_CXX_STANDARD_LIBRARIES "")
-
+# Qt if used
+SET(genList)
+IF (Qt5_FOUND)
+	file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/Inc)
+	file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/Src)
+	INCLUDE_DIRECTORIES ( BEFORE ${LIBRARY_PATH}/Inc)
+	GV_QT5_WRAP_UI (genList ${uiList})
+	GV_QT5_ADD_RESOURCES (genList ${rcList})
+	GV_QT5_AUTOMOC (genList ${moclist})
+ENDIF (Qt5_FOUND)
 
 #-----------------------------------------------
 # Define targets
@@ -132,46 +61,106 @@ STRING (REGEX MATCH "GV_PLUGIN" _matchGigaSpacePlugin "${GV_TARGET_TYPE}")
 
 STRING (TOUPPER ${PROJECT_NAME} PROJECTDLL)
 
-#--
-if (_matchExe)
+# GV_TARGET_TYPE
+if(_matchExe)
+	# GV_EXE
 	add_definitions (-D${PROJECTDLL}_MAKEDLL)
-	ADD_EXECUTABLE (${PROJECT_NAME} ${srcList} ${resList})
-endif (_matchExe)
-
-#--
-if (_matchStaticLib)
+	cuda_add_executable (${PROJECT_NAME} ${srcList} ${genList})
+elseif(_matchStaticLib)
+	# GV_STATIC_LIB
 	add_definitions (-D${PROJECTDLL}_MAKELIB)
-#	ADD_LIBRARY (${PROJECT_NAME} STATIC ${srcList} ${resList})
-	CUDA_ADD_LIBRARY (${PROJECT_NAME} STATIC ${srcList} ${resList})
-endif (_matchStaticLib)
-
-#--
-if (_matchSharedLib)
+	cuda_add_library (${PROJECT_NAME} STATIC ${srcList} ${genList})
+elseif(_matchSharedLib)
+	# GV_SHARED_LIB
 	add_definitions (-D${PROJECTDLL}_MAKEDLL)
-	#ADD_LIBRARY (${PROJECT_NAME} SHARED ${srcList} ${resList})
-	CUDA_ADD_LIBRARY (${PROJECT_NAME} SHARED ${srcList} ${resList})
-endif (_matchSharedLib)
-
-#--
-if (_matchGigaSpacePlugin)
+	cuda_add_library (${PROJECT_NAME} SHARED ${srcList} ${genList})
+elseif(_matchGigaSpacePlugin)
+	# GV_PLUGIN
 	add_definitions (-D${PROJECTDLL}_MAKEDLL)
-    ADD_LIBRARY (${PROJECT_NAME} SHARED ${srcList} ${resList})
+	cuda_add_library (${PROJECT_NAME} SHARED ${srcList} ${genList})
 	if ( NOT PLUGIN_EXTENSION )
 		set( PLUGIN_EXTENSION "gvp" )
 	endif ( NOT PLUGIN_EXTENSION )
-endif (_matchGigaSpacePlugin)
+else(_matchExe)
+	message (FATAL_ERROR "Not set correct GV_TARGET_TYPE ")
+endif(_matchExe)
 
-	
-SET_TARGET_PROPERTIES (${PROJECT_NAME} PROPERTIES DEBUG_POSTFIX ".d")
-
+# Before SET_TARGET_PROPERTIES
 foreach (it ${projectLibList})
-	ADD_DEPENDENCIES (${PROJECT_NAME} ${it})
-	TARGET_LINK_LIBRARIES( ${PROJECT_NAME} debug ${it}.d optimized ${it})
+	TARGET_LINK_LIBRARIES( ${PROJECT_NAME} ${it})
 endforeach (it)
 
-ADD_CUSTOM_COMMAND(TARGET ${PROJECT_NAME} POST_BUILD COMMAND
-#	@echo Copying files to release directory...)
-	echo Copying files to release directory...)
+SET_TARGET_PROPERTIES (${PROJECT_NAME} PROPERTIES DEBUG_POSTFIX ".d")
+
+# LINUX Operating System
+if(UNIX)
+
+# Copy binary files
+#-----------------------------------------------
+if(NOT RELEASE_BIN_DIR)
+	message (FATAL_ERROR "Not set RELEASE_BIN_DIR")
+endif(NOT RELEASE_BIN_DIR)
+
+file(MAKE_DIRECTORY ${RELEASE_BIN_DIR})
+
+if(_matchExe )
+	ADD_CUSTOM_COMMAND(TARGET ${PROJECT_NAME} POST_BUILD
+		COMMAND bash -c 'if test -e \"${LIBRARY_PATH}/${PROJECT_NAME}.d\" \; then ${CMAKE_COMMAND} -E copy_if_different \"${LIBRARY_PATH}/${PROJECT_NAME}.d\" \"${RELEASE_BIN_DIR}\" \; fi'
+		)
+	ADD_CUSTOM_COMMAND(TARGET ${PROJECT_NAME} POST_BUILD 
+		COMMAND bash -c 'if test -e \"${LIBRARY_PATH}/${PROJECT_NAME}\" \; then ${CMAKE_COMMAND} -E copy_if_different \"${LIBRARY_PATH}/${PROJECT_NAME}\" \"${RELEASE_BIN_DIR}\" \; fi'
+		)
+elseif(_matchSharedLib)
+	ADD_CUSTOM_COMMAND(TARGET ${PROJECT_NAME} POST_BUILD
+		COMMAND bash -c 'if test -e \"${LIBRARY_PATH}/lib${PROJECT_NAME}.d.so\" \; then ${CMAKE_COMMAND} -E copy_if_different \"${LIBRARY_PATH}/lib${PROJECT_NAME}.d.so\" \"${RELEASE_BIN_DIR}\" \; fi'
+		)
+	ADD_CUSTOM_COMMAND(TARGET ${PROJECT_NAME} POST_BUILD 
+		COMMAND bash -c 'if test -e \"${LIBRARY_PATH}/lib${PROJECT_NAME}.so\" \; then ${CMAKE_COMMAND} -E copy_if_different \"${LIBRARY_PATH}/lib${PROJECT_NAME}.so\" \"${RELEASE_BIN_DIR}\" \; fi'
+		)
+elseif(_matchStaticLib)
+	ADD_CUSTOM_COMMAND(TARGET ${PROJECT_NAME} POST_BUILD
+		COMMAND bash -c 'if test -e \"${LIBRARY_PATH}/lib${PROJECT_NAME}.d.a\" \; then ${CMAKE_COMMAND} -E copy_if_different \"${LIBRARY_PATH}/lib${PROJECT_NAME}.d.a\" \"${RELEASE_BIN_DIR}\" \; fi'
+		)
+	ADD_CUSTOM_COMMAND(TARGET ${PROJECT_NAME} POST_BUILD 
+		COMMAND bash -c 'if test -e \"${LIBRARY_PATH}/lib${PROJECT_NAME}.a\" \; then ${CMAKE_COMMAND} -E copy_if_different \"${LIBRARY_PATH}/lib${PROJECT_NAME}.a\" \"${RELEASE_BIN_DIR}\" \; fi'
+		)
+elseif(_matchGigaSpacePlugin)
+	ADD_CUSTOM_COMMAND(TARGET ${PROJECT_NAME} POST_BUILD
+		COMMAND bash -c 'if test -e \"${LIBRARY_PATH}/lib${PROJECT_NAME}.d.so\" \; then ${CMAKE_COMMAND} -E copy_if_different \"${LIBRARY_PATH}/lib${PROJECT_NAME}.d.so\" \"${RELEASE_BIN_DIR}/lib${PROJECT_NAME}.d.${PLUGIN_EXTENSION}\" \; fi'
+		)
+	ADD_CUSTOM_COMMAND(TARGET ${PROJECT_NAME} POST_BUILD 
+		COMMAND bash -c 'if test -e \"${LIBRARY_PATH}/lib${PROJECT_NAME}.so\" \; then ${CMAKE_COMMAND} -E copy_if_different \"${LIBRARY_PATH}/lib${PROJECT_NAME}.so\" \"${RELEASE_BIN_DIR}/lib${PROJECT_NAME}.${PLUGIN_EXTENSION}\" \; fi'
+		)
+else(_matchExe)
+	message (FATAL_ERROR "Not set correct GV_TARGET_TYPE ")
+endif(_matchExe)
+
+# Copy library files
+#-----------------------------------------------
+if(NOT RELEASE_LIB_DIR)
+	message (FATAL_ERROR "Not set RELEASE_LIB_DIR")
+endif(NOT RELEASE_LIB_DIR)
+
+file(MAKE_DIRECTORY ${RELEASE_LIB_DIR})
+
+if(_matchSharedLib)
+	ADD_CUSTOM_COMMAND(TARGET ${PROJECT_NAME} POST_BUILD
+		COMMAND bash -c 'if test -e \"${LIBRARY_PATH}/lib${PROJECT_NAME}.d.so\" \; then ${CMAKE_COMMAND} -E copy_if_different \"${LIBRARY_PATH}/lib${PROJECT_NAME}.d.so\" \"${RELEASE_LIB_DIR}\" \; fi'
+		)
+	ADD_CUSTOM_COMMAND(TARGET ${PROJECT_NAME} POST_BUILD 
+		COMMAND bash -c 'if test -e \"${LIBRARY_PATH}/lib${PROJECT_NAME}.so\" \; then ${CMAKE_COMMAND} -E copy_if_different \"${LIBRARY_PATH}/lib${PROJECT_NAME}.so\" \"${RELEASE_LIB_DIR}\" \; fi'
+		)
+endif(_matchSharedLib)
+
+elseif (WIN32)
+
+#-----------------------------------------------
+# Manage Win32 definitions
+#-----------------------------------------------
+ADD_DEFINITIONS (-DWIN32 -D_WINDOWS)
+if (NOT USE_FULL_WIN32_H)
+	ADD_DEFINITIONS (-DWIN32_LEAN_AND_MEAN)
+endif (NOT USE_FULL_WIN32_H)
 
 #-----------------------------------------------
 # A macro for post build copy
@@ -179,8 +168,6 @@ ADD_CUSTOM_COMMAND(TARGET ${PROJECT_NAME} POST_BUILD COMMAND
 MACRO(POST_BUILD_COPY Src Dst)
 FILE(TO_NATIVE_PATH ${Src} SrcNative)
 FILE(TO_NATIVE_PATH ${Dst} DstNative)
-
-IF (WIN32)
 ADD_CUSTOM_COMMAND(TARGET ${PROJECT_NAME} POST_BUILD
 	COMMAND if EXIST \"${SrcNative}\" \(
 	COMMAND 	echo F | xcopy /d /y /i \"${SrcNative}\" \"${DstNative}\" 
@@ -190,44 +177,15 @@ ADD_CUSTOM_COMMAND(TARGET ${PROJECT_NAME} POST_BUILD
 	COMMAND		\)
 	COMMAND \)
 	)
-
-ELSE (WIN32)
-
-## If the Src is of the form /my/path/*.*, then need to iterate over the list
-## cp does not work as copy under win32
-#FILE(GLOB myListOfFiles ${Src})
-#LIST(LENGTH myListOfFiles myListLength)
-#
-#IF(myListLength EQUAL 0)
-#	SET(myListOfFiles ${Src}) # of there was only one file, ie. /my/path/mycodec.vip, not GLOBED !
-#ENDIF(myListLength EQUAL 0)
-#
-#FOREACH( myFile ${myListOfFiles})
-		#MESSAGE(STATUS "Processing ${Src}")
-		#MESSAGE( STATUS "for myFile in ${Src} \; do if [ -e $myFile ] \;  then cp -u $myFile ${Dst} \; fi; done")
-		ADD_CUSTOM_COMMAND(TARGET ${PROJECT_NAME} POST_BUILD
-		COMMAND for myFile in ${Src} \; do if [ -e $$myFile ] \;  then cp -u $$myFile ${Dst} \; fi; done)
-#ENDFOREACH( myFile)
-
-ENDIF (WIN32)
-
 ENDMACRO(POST_BUILD_COPY)
-
 
 # Copy binary files
 #-----------------------------------------------
-if (RELEASE_BIN_DIR)
+IF (NOT RELEASE_BIN_DIR)
+	message (FATAL_ERROR "Not set RELEASE_BIN_DIR")
+ENDIF(NOT RELEASE_BIN_DIR )
 
-MAKE_DIRECTORY(${RELEASE_BIN_DIR})
-
-# There's a bug with VC (at least the 7.1 version): the generated pdb in debug has the name ${PROJECT_NAME}.pdb instead of ${PROJECT_NAME}.d.pdb
-# So we copy both files
-#ADD_CUSTOM_COMMAND(TARGET ${PROJECT_NAME} POST_BUILD COMMAND
-#	IF EXIST \"${LIBRARY_PATH}\\DEBUG\\${PROJECT_NAME}.pdb\" copy \"${LIBRARY_PATH}\\DEBUG\\${PROJECT_NAME}.pdb\" \"${RELEASE_BIN_DIR}/${PROJECT_NAME}.d.pdb\")
-#ADD_CUSTOM_COMMAND(TARGET ${PROJECT_NAME} POST_BUILD COMMAND
-#	IF EXIST \"${LIBRARY_PATH}\\DEBUG\\${PROJECT_NAME}.d.pdb\" copy \"${LIBRARY_PATH}\\DEBUG\\${PROJECT_NAME}.d.pdb\" \"${RELEASE_BIN_DIR}/${PROJECT_NAME}.d.pdb\")
-
-IF (WIN32)
+file(MAKE_DIRECTORY ${RELEASE_BIN_DIR})
 
 IF(_matchExe)
 ADD_CUSTOM_COMMAND(TARGET ${PROJECT_NAME} POST_BUILD COMMAND
@@ -238,9 +196,6 @@ ADD_CUSTOM_COMMAND(TARGET ${PROJECT_NAME} POST_BUILD COMMAND
 	IF EXIST \"${LIBRARY_PATH}\\DEBUG\\${PROJECT_NAME}.d.pdb\" copy \"${LIBRARY_PATH}\\DEBUG\\${PROJECT_NAME}.d.pdb\" \"${RELEASE_BIN_DIR}/${PROJECT_NAME}.d.pdb\")
 ADD_CUSTOM_COMMAND(TARGET ${PROJECT_NAME} POST_BUILD COMMAND
 	IF EXIST \"${LIBRARY_PATH}\\RELEASE\\${PROJECT_NAME}.exe\" copy \"${LIBRARY_PATH}\\RELEASE\\${PROJECT_NAME}.exe\" \"${RELEASE_BIN_DIR}/${PROJECT_NAME}.exe\")
-
-#POST_BUILD_COPY(${LIBRARY_PATH}/Release/${PROJECT_NAME}.d.exe ${RELEASE_DIR_BIN})
-#POST_BUILD_COPY(${LIBRARY_PATH}/Release/${PROJECT_NAME}.exe ${RELEASE_DIR_BIN})
 
 ELSE(_matchExe)
 
@@ -270,133 +225,23 @@ ENDIF(_matchGigaSpacePlugin)
 
 ENDIF(_matchExe)
 
-
-
-ELSE (WIN32)
-
-IF(_matchExe )# AND RELEASE_DIR_BIN)
-    #FILE( MAKE_DIRECTORY ${RELEASE_DIR_BIN})
-    POST_BUILD_COPY( ${LIBRARY_PATH}/${PROJECT_NAME}* ${RELEASE_BIN_DIR})
-ENDIF (_matchExe )# AND RELEASE_DIR_BIN)
-
-#IF(NOT _matchExe AND RELEASE_DIR_LIB)
-
-IF(_matchSharedLib)
-    #FILE( MAKE_DIRECTORY ${RELEASE_DIR_LIB})
-    
-	POST_BUILD_COPY( ${LIBRARY_PATH}/lib${PROJECT_NAME}.* ${RELEASE_BIN_DIR} )
-	
-	if ( RELEASE_LIB_DIR )
-		MAKE_DIRECTORY (${RELEASE_LIB_DIR})
-		POST_BUILD_COPY( ${LIBRARY_PATH}/lib${PROJECT_NAME}.* ${RELEASE_LIB_DIR} )
-	endif ()
-	
-ENDIF(_matchSharedLib)
-
-IF(_matchStaticLib)
-    #FILE( MAKE_DIRECTORY ${RELEASE_DIR_LIB})
-    POST_BUILD_COPY( ${LIBRARY_PATH}/lib${PROJECT_NAME}.* ${RELEASE_BIN_DIR} )
-ENDIF(_matchStaticLib)
-
-#ENDIF(NOT _matchExe AND RELEASE_DIR_LIB)
-
-IF(_matchPlugin)
-#	FILE( MAKE_DIRECTORY ${RELEASE_DIR_BIN})
-	POST_BUILD_COPY(${LIBRARY_PATH}/lib${PROJECT_NAME}.d.${PLUGIN_EXTENSION} ${RELEASE_BIN_DIR})
-	POST_BUILD_COPY(${LIBRARY_PATH}/lib${PROJECT_NAME}.${PLUGIN_EXTENSION} ${RELEASE_BIN_DIR})
-ENDIF(_matchPlugin)
-
-
-ENDIF (WIN32)
-
-
-
-endif( RELEASE_BIN_DIR )
-
 # Copy library files
 #-----------------------------------------------
-if ( RELEASE_LIB_DIR )
+IF ( NOT RELEASE_LIB_DIR )
+	message (FATAL_ERROR "Not set RELEASE_LIB_DIR")
+ENDIF ( NOT RELEASE_LIB_DIR )
 
-MAKE_DIRECTORY (${RELEASE_LIB_DIR})
-IF (WIN32)
-    ADD_CUSTOM_COMMAND(TARGET ${PROJECT_NAME} POST_BUILD COMMAND
-	    IF EXIST \"${LIBRARY_PATH}\\DEBUG\\${PROJECT_NAME}.d.lib\" copy \"${LIBRARY_PATH}\\DEBUG\\${PROJECT_NAME}.d.lib\" \"${RELEASE_LIB_DIR}/${PROJECT_NAME}.d.lib\")
-    ADD_CUSTOM_COMMAND(TARGET ${PROJECT_NAME} POST_BUILD COMMAND
-	    IF EXIST \"${LIBRARY_PATH}\\RELEASE\\${PROJECT_NAME}.lib\" copy \"${LIBRARY_PATH}\\RELEASE\\${PROJECT_NAME}.lib\" \"${RELEASE_LIB_DIR}/${PROJECT_NAME}.lib\")
-ENDIF (WIN32)
-
-endif ( RELEASE_LIB_DIR )
-
-# Copy header files
-#-----------------------------------------------
-
-# Macro used to copy header files
-MACRO(GV_COPY_ROOT_HEADER)
-#ADD_CUSTOM_COMMAND(TARGET ${PROJECT_NAME} POST_BUILD COMMAND
-#	copy \"${CMAKE_SOURCE_DIR}\\GigaSpace\\GsConfig.h\" \"${RELEASE_INC_DIR}\")
-POST_BUILD_COPY(${CMAKE_SOURCE_DIR}/GigaSpace/GsConfig.h ${RELEASE_INC_DIR})
-ENDMACRO(GV_COPY_ROOT_HEADER)
-
-MACRO(GV_COPY_HEADER package)
-MAKE_DIRECTORY(${RELEASE_INC_DIR}\\${package})
-#ADD_CUSTOM_COMMAND(TARGET ${PROJECT_NAME} POST_BUILD COMMAND
-#	copy \"${CMAKE_SOURCE_DIR}\\GigaSpace\\${package}\\*.h*\" \"${RELEASE_INC_DIR}\\${package}\")
-POST_BUILD_COPY(${CMAKE_SOURCE_DIR}/GigaSpace/${package}/*.h* ${RELEASE_INC_DIR}/${package})
-IF (inlList)
-#ADD_CUSTOM_COMMAND(TARGET ${PROJECT_NAME} POST_BUILD COMMAND
-#	copy \"${CMAKE_SOURCE_DIR}\\GigaSpace\\${package}\\*.inl\" \"${RELEASE_INC_DIR}\\${package}\")
-POST_BUILD_COPY(${CMAKE_SOURCE_DIR}/GigaSpace/${package}/*.inl ${RELEASE_INC_DIR}/${package})
-ENDIF (inlList)
-ENDMACRO(GV_COPY_HEADER)
-
-MACRO(GS_COPY_HEADER package)
-MAKE_DIRECTORY(${RELEASE_INC_DIR}\\${package})
-#ADD_CUSTOM_COMMAND(TARGET ${PROJECT_NAME} POST_BUILD COMMAND
-#	copy \"${CMAKE_SOURCE_DIR}\\GsGraphics\\${package}\\*.h*\" \"${RELEASE_INC_DIR}\\${package}\")
-#POST_BUILD_COPY(${CMAKE_SOURCE_DIR}/GsGraphics/${package}/*.h* ${RELEASE_INC_DIR}/${package})
-POST_BUILD_COPY(${CMAKE_SOURCE_DIR}/${package}/${package}/*.h* ${RELEASE_INC_DIR}/${package})
-IF (inlList)
-#ADD_CUSTOM_COMMAND(TARGET ${PROJECT_NAME} POST_BUILD COMMAND
-#	copy \"${CMAKE_SOURCE_DIR}\\GsGraphics\\${package}\\*.inl\" \"${RELEASE_INC_DIR}\\${package}\")
-#POST_BUILD_COPY(${CMAKE_SOURCE_DIR}/GsGraphics/${package}/*.inl ${RELEASE_INC_DIR}/${package})
-POST_BUILD_COPY(${CMAKE_SOURCE_DIR}/${package}/${package}/*.inl ${RELEASE_INC_DIR}/${package})
-ENDIF (inlList)
-ENDMACRO(GS_COPY_HEADER)
-
-if ( RELEASE_INC_DIR )
-
-message (STATUS "${RELEASE_INC_DIR}")
-
-file( MAKE_DIRECTORY(${RELEASE_INC_DIR}) )
-
-IF(MODULE)
-    MAKE_DIRECTORY(${RELEASE_INC_DIR}/${MODULE})
-    #ADD_CUSTOM_COMMAND(TARGET ${PROJECT_NAME} POST_BUILD COMMAND
-    #	copy \"${LIBRARY_PATH}\\Inc\\${MODULE}\\*.h\" \"${RELEASE_INC_DIR}/${MODULE}\")
-    POST_BUILD_COPY(${LIBRARY_PATH}/Inc/${MODULE}/*.h* ${RELEASE_INC_DIR}/${MODULE})
-IF (inlList)
-    #ADD_CUSTOM_COMMAND(TARGET ${PROJECT_NAME} POST_BUILD COMMAND
-    #	copy \"${LIBRARY_PATH}\\Inc\\${MODULE}\\*.inl\" \"${RELEASE_INC_DIR}/${MODULE}\")
-    POST_BUILD_COPY(${LIBRARY_PATH}/Inc/${MODULE}/*.inl ${RELEASE_INC_DIR}/${MODULE})
-ENDIF (inlList)
-ELSE(MODULE)
-GV_COPY_ROOT_HEADER()
-GV_COPY_HEADER(GvCore)
-GV_COPY_HEADER(GvCache)
-GV_COPY_HEADER(GvStructure)
-GV_COPY_HEADER(GvRendering)
-GV_COPY_HEADER(GvUtils)
-GV_COPY_HEADER(GvPerfMon)
-GV_COPY_HEADER(GvVoxelizer)
-GS_COPY_HEADER(GsGraphics)
-GS_COPY_HEADER(GsCompute)
-ENDIF(MODULE)
-	
-endif( RELEASE_INC_DIR )
+file(MAKE_DIRECTORY ${RELEASE_LIB_DIR})
 
 ADD_CUSTOM_COMMAND(TARGET ${PROJECT_NAME} POST_BUILD COMMAND
-#	@echo Finish copying files...)
-	echo Finish copying files...)
+		IF EXIST \"${LIBRARY_PATH}\\DEBUG\\${PROJECT_NAME}.d.lib\" copy \"${LIBRARY_PATH}\\DEBUG\\${PROJECT_NAME}.d.lib\" \"${RELEASE_LIB_DIR}/${PROJECT_NAME}.d.lib\")
+ADD_CUSTOM_COMMAND(TARGET ${PROJECT_NAME} POST_BUILD COMMAND
+		IF EXIST \"${LIBRARY_PATH}\\RELEASE\\${PROJECT_NAME}.lib\" copy \"${LIBRARY_PATH}\\RELEASE\\${PROJECT_NAME}.lib\" \"${RELEASE_LIB_DIR}/${PROJECT_NAME}.lib\")
 
-set (CMAKE_SUPPRESS_REGENERATION true)
+else (UNIX)
+
+message (FATAL_ERROR "Unknown operating system ")
+
+endif (UNIX)
+
 

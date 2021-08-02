@@ -1,0 +1,22 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "pre-build-glibc-debug",
+            "type": "shell",
+            "dependsOn": {},
+            "command": "${workspaceFolder}/Install/Linux/install.sh debug",
+            "problemMatcher": [],
+            "group": "build"
+        },
+        {
+            "label": "build-glibc-debug",
+            "type": "shell",
+            "command": "${workspaceFolder}/Install/Linux/build.sh debug",
+            "problemMatcher": [],
+            "group": "build"
+        }
+    ]
+}

@@ -17,11 +17,6 @@ set (CMAKE_COLOR_MAKEFILE ON)
 # Project
 #----------------------------------------------------------------
 
-# Invite message
-MESSAGE ( STATUS "" )
-MESSAGE ( STATUS "PROJECT GENERATION : GigaSpace Tests" )
-MESSAGE ( STATUS "" )
-
 # Project name
 project (Tests)
 
@@ -49,7 +44,7 @@ MESSAGE ( STATUS "" )
 
 # Search for CUDA
 MESSAGE ( STATUS "REQUIRED PACKAGE : CUDA 5.0" )
-find_package (CUDA REQUIRED) # TO DO : utiliser FindCUDA à la place
+find_package (CUDA REQUIRED) # TO DO : utiliser FindCUDA ï¿½ la place
 if (CUDA_FOUND)
 	message (STATUS "system has CUDA")
 	message (STATUS "CUDA version : ${CUDA_VERSION_STRING}")
@@ -61,7 +56,7 @@ MESSAGE ( STATUS "" )
 
 # Search for OpenGL
 MESSAGE ( STATUS "REQUIRED PACKAGE : OpenGL" )
-find_package (OpenGL REQUIRED) # TO DO : utiliser FindOpenGL à la place
+find_package (OpenGL REQUIRED) # TO DO : utiliser FindOpenGL ï¿½ la place
 if (OPENGL_FOUND)
 	message (STATUS "system has OpenGL")
 endif()
@@ -130,8 +125,6 @@ SET (CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/../CMake")
 # Options
 #----------------------------------------------------------------
 
-option (GV_ENABLE_DEBUGABLE_DEVICE_CODE "Enable/disable generation of debug-able device code" OFF)
-
 #set (CUDA_NVCC_FLAGS "-arch=sm_20;-G0")
 #list( APPEND CUDA_NVCC_FLAGS -gencode=arch=compute_20,code=\"sm_20,compute_20\")
 #list(APPEND CUDA_NVCC_FLAGS -G0)
@@ -143,7 +136,7 @@ option (GV_ENABLE_DEBUGABLE_DEVICE_CODE "Enable/disable generation of debug-able
 # Set your compute capability version
 #
 # GiagVoxels requires 2.0 at least
-list(APPEND CUDA_NVCC_FLAGS "-arch=sm_20")
+#list(APPEND CUDA_NVCC_FLAGS "-arch=sm_20")
 #list(APPEND CUDA_NVCC_FLAGS "-arch=sm_21")
 #list(APPEND CUDA_NVCC_FLAGS "-arch=sm_30")
 #list(APPEND CUDA_NVCC_FLAGS "-arch=sm_35")

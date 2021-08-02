@@ -50,7 +50,7 @@
 #include "GvCore/GsCoreConfig.h"
 
 // Cuda
-#include <host_defines.h>
+#include <cuda_runtime.h>
 #include <vector_types.h>
 #include <cuda_texture_types.h>
 

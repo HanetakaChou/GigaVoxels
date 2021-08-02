@@ -10,11 +10,6 @@ cmake_minimum_required (VERSION 2.8)
 # Project
 #----------------------------------------------------------------
 
-# Invite message
-MESSAGE ( STATUS "-----------------------------------------------------" )
-MESSAGE ( STATUS "- PROJECT GENERATION : GigaVoxels/GigaSpace Library -" )
-MESSAGE ( STATUS "-----------------------------------------------------" )
-
 # Project name
 project (Library)
 

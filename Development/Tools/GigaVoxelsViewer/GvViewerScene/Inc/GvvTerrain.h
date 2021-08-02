@@ -51,7 +51,7 @@
 #include "GvvMesh.h"
 
 // OpenGL
-#include <GL/glew.h>
+#include <GsGL/glew.h>
 
 // STL
 #include <vector>

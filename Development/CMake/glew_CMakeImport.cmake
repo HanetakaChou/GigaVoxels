@@ -1,15 +1,21 @@
 #----------------------------------------------------------------
 # Import library
 #----------------------------------------------------------------
-	
-MESSAGE (STATUS "IMPORT : glew library")
 
 #----------------------------------------------------------------
 # SET library PATH
 #----------------------------------------------------------------
 
 INCLUDE (GvSettings_CMakeImport)
-	
+
+#----------------------------------------------------------------
+# GLEW library settings
+#----------------------------------------------------------------
+
+set (GV_GLEW_RELEASE "${GV_ROOT}/External/CommonLibraries/glew-1.12.0")
+set (GV_GLEW_INC "${GV_GLEW_RELEASE}/include")
+set (GV_GLEW_LIB "${GV_GLEW_RELEASE}/lib")
+
 #----------------------------------------------------------------
 # Add INCLUDE library directories
 #----------------------------------------------------------------
@@ -23,33 +29,17 @@ INCLUDE_DIRECTORIES (${GV_GLEW_INC})
 LINK_DIRECTORIES (${GV_GLEW_LIB})
 	
 #----------------------------------------------------------------
-# Set LINK libraries if not defined by user
+# Set LINK libraries
 #----------------------------------------------------------------
 
-IF ( "${glewLib}" STREQUAL "" )
-	IF (WIN32)
-		IF ( ${GV_DESTINATION_ARCH} STREQUAL "x86" )
-			SET (glewLib "glew32")
-		ELSE ()
-			SET (glewLib "glew32")
-		ENDIF ()
-	ELSE ()
-		IF ( ${GV_DESTINATION_ARCH} STREQUAL "x86" )
-			SET (glewLib "GLEW")
-		ELSE ()
-			SET (glewLib "libGLEW.a")
-		ENDIF ()
-	ENDIF ()
+IF (WIN32)
+	SET (glewLib "glew32")
+ELSE ()
+	SET (glewLib "libGLEW.a")
 ENDIF ()
 
 #----------------------------------------------------------------
 # Add LINK libraries
 #----------------------------------------------------------------
 
-FOREACH (it ${glewLib})
-	IF (WIN32)
-		LINK_LIBRARIES (optimized ${it} debug ${it})
-	ELSE ()
-		LINK_LIBRARIES (optimized ${it} debug ${it})
-	ENDIF ()
-ENDFOREACH (it)
+LINK_LIBRARIES(${glewLib})

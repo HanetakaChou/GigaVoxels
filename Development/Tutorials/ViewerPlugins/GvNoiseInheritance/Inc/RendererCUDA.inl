@@ -341,9 +341,9 @@ void RendererCUDA< TVolumeTreeType, TVolumeTreeCacheType, TSampleShader >
 	viewSurfaceVS[ 0 ] = make_float2( fleft, fbottom );
 	viewSurfaceVS[ 1 ] = make_float2( fright, ftop );
 
-	float3 viewPlane[ 2 ];
-	viewPlane[ 0 ] = make_float3( fleft, fbottom, fnear );
-	viewPlane[ 1 ] = make_float3( fright, ftop, fnear );
+	// float3 viewPlane[ 2 ];
+	// viewPlane[ 0 ] = make_float3( fleft, fbottom, fnear );
+	// viewPlane[ 1 ] = make_float3( fright, ftop, fnear );
 	// float3 viewSize = ( viewPlane[ 1 ] - viewPlane[ 0 ] );
 
 	// Projected 2D Bounding Box of the GigaVoxels 3D BBox.
@@ -465,9 +465,9 @@ void RendererCUDA< TVolumeTreeType, TVolumeTreeCacheType, TSampleShader >
 	//
 	//dim3 gridSize( iDivUp( /*projectedBBoxSize*/_projectedBBox.z, RenderBlockResolution::x ), iDivUp( /*projectedBBoxSize*/_projectedBBox.w, RenderBlockResolution::y ), 1 );
 	
-	uint cpuDescentCount = 0;
-	uint cpuSkippedCount = 0;
-	uint cpuSkippedNb = 0;
+	//uint cpuDescentCount = 0;
+	//uint cpuSkippedCount = 0;
+	//uint cpuSkippedNb = 0;
 
 #ifdef PROXY_PRINTOUT
 	cudaMemcpyToSymbol( nbPixels, &cpuDescentCount, sizeof( uint ) );
@@ -507,9 +507,9 @@ void RendererCUDA< TVolumeTreeType, TVolumeTreeCacheType, TSampleShader >
 	CUDAPM_RENDER_CACHE_INFO( 256, 512 );
 
 	
-	uint nbDescentCPU;
-	uint nbSkippedDescentsCPU;
-	uint nbSkippedCPU;
+	//uint nbDescentCPU;
+	//uint nbSkippedDescentsCPU;
+	// uint nbSkippedCPU;
 
 #ifdef PROXY_PRINTOUT
 	cudaMemcpyFromSymbol( &nbDescentCPU, nbPixels, sizeof( uint ) );
@@ -560,25 +560,24 @@ bool RendererCUDA< TVolumeTreeType, TVolumeTreeCacheType, TSampleShader >
 		{
 			struct cudaArray* imageArray = static_cast< struct cudaArray* >( graphicsResource->getMappedAddress() );
 
-			cudaError_t error;
 			switch ( graphicsResourceSlot )
 			{
 			case GvRendering::GsGraphicsInteroperabiltyHandler::eColorReadSlot:
-					error = cudaBindTextureToArray( GvRendering::_inputColorTexture, imageArray );
+					GS_CUDA_SAFE_CALL(cudaBindTextureToArray( GvRendering::_inputColorTexture, imageArray ));
 					break;
 
 				case GvRendering::GsGraphicsInteroperabiltyHandler::eColorWriteSlot:
 				case GvRendering::GsGraphicsInteroperabiltyHandler::eColorReadWriteSlot:
-					error = cudaBindSurfaceToArray( GvRendering::_colorSurface, imageArray );
+					GS_CUDA_SAFE_CALL(cudaBindSurfaceToArray( GvRendering::_colorSurface, imageArray ));
 					break;
 
 				case GvRendering::GsGraphicsInteroperabiltyHandler::eDepthReadSlot:
-					error = cudaBindTextureToArray( GvRendering::_inputDepthTexture, imageArray );
+					GS_CUDA_SAFE_CALL(cudaBindTextureToArray( GvRendering::_inputDepthTexture, imageArray ));
 					break;
 
 				case GvRendering::GsGraphicsInteroperabiltyHandler::eDepthWriteSlot:
 				case GvRendering::GsGraphicsInteroperabiltyHandler::eDepthReadWriteSlot:
-					error = cudaBindSurfaceToArray( GvRendering::_depthSurface, imageArray );
+					GS_CUDA_SAFE_CALL(cudaBindSurfaceToArray( GvRendering::_depthSurface, imageArray ));
 					break;
 
 				default:
@@ -588,7 +587,7 @@ bool RendererCUDA< TVolumeTreeType, TVolumeTreeCacheType, TSampleShader >
 		}
 	}
 
-	return false;
+	return true;
 }
 
 /******************************************************************************
@@ -621,11 +620,10 @@ bool RendererCUDA< TVolumeTreeType, TVolumeTreeCacheType, TSampleShader >
 		{
 			struct cudaArray* imageArray = static_cast< struct cudaArray* >( graphicsResource->getMappedAddress() );
 
-			cudaError_t error;
 			switch ( graphicsResourceSlot )
 			{
 			case GvRendering::GsGraphicsInteroperabiltyHandler::eColorReadSlot:
-					error = cudaUnbindTexture( GvRendering::_inputColorTexture );
+					GS_CUDA_SAFE_CALL(cudaUnbindTexture( GvRendering::_inputColorTexture ));
 					break;
 
 				case GvRendering::GsGraphicsInteroperabiltyHandler::eColorWriteSlot:
@@ -634,7 +632,7 @@ bool RendererCUDA< TVolumeTreeType, TVolumeTreeCacheType, TSampleShader >
 					break;
 
 				case GvRendering::GsGraphicsInteroperabiltyHandler::eDepthReadSlot:
-					error = cudaUnbindTexture( GvRendering::_inputDepthTexture );
+					GS_CUDA_SAFE_CALL(cudaUnbindTexture( GvRendering::_inputDepthTexture ));
 					break;
 
 				case GvRendering::GsGraphicsInteroperabiltyHandler::eDepthWriteSlot:
@@ -649,6 +647,6 @@ bool RendererCUDA< TVolumeTreeType, TVolumeTreeCacheType, TSampleShader >
 		}
 	}
 
-	return false;
+	return true;
 }
 

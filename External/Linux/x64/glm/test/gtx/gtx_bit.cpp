@@ -7,9 +7,9 @@
 // File    : test/gtx/bit.cpp
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-#include <glm/glm.hpp>
-#include <glm/gtc/type_precision.hpp>
-#include <glm/gtx/bit.hpp>
+#include <gsglm/glm.hpp>
+#include <gsglm/gtc/type_precision.hpp>
+#include <gsglm/gtx/bit.hpp>
 #include <iostream>
 
 enum result

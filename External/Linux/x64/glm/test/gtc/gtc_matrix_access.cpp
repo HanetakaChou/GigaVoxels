@@ -7,8 +7,8 @@
 // File    : test/gtc/matrix_access.cpp
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_access.hpp>
+#include <gsglm/glm.hpp>
+#include <gsglm/gtc/matrix_access.hpp>
 
 int test_mat2x2_row_set()
 {

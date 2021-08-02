@@ -168,7 +168,7 @@ void GvvPipelineInterfaceViewer::init()
 		//	}
 		//}
 	}
-	//----------- A priori crash lorsque c'est appelé 2 fois ??------
+	//----------- A priori crash lorsque c'est appelï¿½ 2 fois ??------
 	// Initialize CUDA with OpenGL Interoperability
 	//cudaGLSetGLDevice( cutGetMaxGflopsDeviceId() );	// deprecated, use cudaSetDevice()
 	//CUT_CHECK_ERROR( "cudaGLSetGLDevice" );
@@ -298,7 +298,11 @@ void GvvPipelineInterfaceViewer::draw()
 
 		if ( mPipeline->hasLight() )
 		{
-			_manipulatedFrame->getPosition( lightPos[ 0 ], lightPos[ 1 ], lightPos[ 2 ] );
+			qreal x,y,z;
+			_manipulatedFrame->getPosition( x, y, z );
+			lightPos[ 0 ] = x;
+			lightPos[ 1 ] = y;
+			lightPos[ 2 ] = z;
 	
 			// Should not add a cudaMemcpy() call to update light position, if it is static
 			//mPipeline->setLightPosition( lightPos[ 0 ], lightPos[ 1 ], lightPos[ 2 ] );
@@ -564,7 +568,11 @@ void GvvPipelineInterfaceViewer::onFrameManipulated()
 	if ( mPipeline != NULL )
 	{
 		float pos[ 4 ] = { 1.f, 1.f, 1.f, 1.f };
-		_manipulatedFrame->getPosition( pos[ 0 ], pos[ 1 ], pos[ 2 ] );
+		qreal x,y,z;
+		_manipulatedFrame->getPosition( x, y, z );
+		pos[ 0 ] = x;
+		pos[ 1 ] = y; 
+		pos[ 2 ] = z;
 
 		mPipeline->setLightPosition( pos[ 0 ], pos[ 1 ], pos[ 2 ] );
 	}

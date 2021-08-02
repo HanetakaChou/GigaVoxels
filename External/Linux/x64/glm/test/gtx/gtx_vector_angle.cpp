@@ -7,8 +7,8 @@
 // File    : test/gtx/vector_angle.cpp
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-#include <glm/glm.hpp>
-#include <glm/gtx/vector_angle.hpp>
+#include <gsglm/glm.hpp>
+#include <gsglm/gtx/vector_angle.hpp>
 #include <iostream>
 #include <limits>
 

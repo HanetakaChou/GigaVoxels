@@ -7,8 +7,8 @@
 // File    : test/gtc/ulp.cpp
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-#include <glm/glm.hpp>
-#include <glm/gtc/ulp.hpp>
+#include <gsglm/glm.hpp>
+#include <gsglm/gtc/ulp.hpp>
 #include <iostream>
 #include <limits>
 

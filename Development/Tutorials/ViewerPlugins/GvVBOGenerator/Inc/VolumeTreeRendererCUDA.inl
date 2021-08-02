@@ -340,9 +340,9 @@ void VolumeTreeRendererCUDA< TVolumeTreeType, TVolumeTreeCacheType, TSampleShade
 	viewSurfaceVS[ 0 ] = make_float2( fleft, fbottom );
 	viewSurfaceVS[ 1 ] = make_float2( fright, ftop );
 
-	float3 viewPlane[ 2 ];
-	viewPlane[ 0 ] = make_float3( fleft, fbottom, fnear );
-	viewPlane[ 1 ] = make_float3( fright, ftop, fnear );
+	// float3 viewPlane[ 2 ];
+	// viewPlane[ 0 ] = make_float3( fleft, fbottom, fnear );
+	// viewPlane[ 1 ] = make_float3( fright, ftop, fnear );
 	// float3 viewSize = ( viewPlane[ 1 ] - viewPlane[ 0 ] );
 
 	// Projected 2D Bounding Box of the GigaVoxels 3D BBox.
@@ -537,25 +537,24 @@ bool VolumeTreeRendererCUDA< TVolumeTreeType, TVolumeTreeCacheType, TSampleShade
 		{
 			struct cudaArray* imageArray = static_cast< struct cudaArray* >( graphicsResource->getMappedAddress() );
 
-			cudaError_t error;
 			switch ( graphicsResourceSlot )
 			{
 				case GvRendering::GsGraphicsInteroperabiltyHandler::eColorReadSlot:
-					error = cudaBindTextureToArray( GvRendering::_inputColorTexture, imageArray );
+					GS_CUDA_SAFE_CALL(cudaBindTextureToArray( GvRendering::_inputColorTexture, imageArray ));
 					break;
 
 				case GvRendering::GsGraphicsInteroperabiltyHandler::eColorWriteSlot:
 				case GvRendering::GsGraphicsInteroperabiltyHandler::eColorReadWriteSlot:
-					error = cudaBindSurfaceToArray( GvRendering::_colorSurface, imageArray );
+					GS_CUDA_SAFE_CALL(cudaBindSurfaceToArray( GvRendering::_colorSurface, imageArray ));
 					break;
 
 				case GvRendering::GsGraphicsInteroperabiltyHandler::eDepthReadSlot:
-					error = cudaBindTextureToArray( GvRendering::_inputDepthTexture, imageArray );
+					GS_CUDA_SAFE_CALL(cudaBindTextureToArray( GvRendering::_inputDepthTexture, imageArray ));
 					break;
 
 				case GvRendering::GsGraphicsInteroperabiltyHandler::eDepthWriteSlot:
 				case GvRendering::GsGraphicsInteroperabiltyHandler::eDepthReadWriteSlot:
-					error = cudaBindSurfaceToArray( GvRendering::_depthSurface, imageArray );
+					GS_CUDA_SAFE_CALL(cudaBindSurfaceToArray( GvRendering::_depthSurface, imageArray ));
 					break;
 
 				default:
@@ -565,7 +564,7 @@ bool VolumeTreeRendererCUDA< TVolumeTreeType, TVolumeTreeCacheType, TSampleShade
 		}
 	}
 
-	return false;
+	return true;
 }
 
 /******************************************************************************
@@ -598,11 +597,10 @@ bool VolumeTreeRendererCUDA< TVolumeTreeType, TVolumeTreeCacheType, TSampleShade
 		{
 			struct cudaArray* imageArray = static_cast< struct cudaArray* >( graphicsResource->getMappedAddress() );
 
-			cudaError_t error;
 			switch ( graphicsResourceSlot )
 			{
 				case GvRendering::GsGraphicsInteroperabiltyHandler::eColorReadSlot:
-					error = cudaUnbindTexture( GvRendering::_inputColorTexture );
+					GS_CUDA_SAFE_CALL(cudaUnbindTexture( GvRendering::_inputColorTexture ));
 					break;
 
 				case GvRendering::GsGraphicsInteroperabiltyHandler::eColorWriteSlot:
@@ -611,7 +609,7 @@ bool VolumeTreeRendererCUDA< TVolumeTreeType, TVolumeTreeCacheType, TSampleShade
 					break;
 
 				case GvRendering::GsGraphicsInteroperabiltyHandler::eDepthReadSlot:
-					error = cudaUnbindTexture( GvRendering::_inputDepthTexture );
+					GS_CUDA_SAFE_CALL(cudaUnbindTexture( GvRendering::_inputDepthTexture ));
 					break;
 
 				case GvRendering::GsGraphicsInteroperabiltyHandler::eDepthWriteSlot:
@@ -626,5 +624,5 @@ bool VolumeTreeRendererCUDA< TVolumeTreeType, TVolumeTreeCacheType, TSampleShade
 		}
 	}
 
-	return false;
+	return true;
 }

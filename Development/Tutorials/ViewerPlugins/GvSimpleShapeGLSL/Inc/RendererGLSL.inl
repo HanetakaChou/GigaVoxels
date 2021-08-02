@@ -367,7 +367,7 @@ void RendererGLSL< TDataStructureType, TVolumeTreeCacheType >
 	// Copy data to CUDA memory
 	// - use async copy first
 	GS_CUDA_SAFE_CALL( cudaMemcpyToSymbolAsync( k_renderViewContext, &viewContext, sizeof( viewContext ) ) );
-	GS_CUDA_SAFE_CALL( cudaMemcpyToSymbolAsync( k_currentTime, &(this->_currentTime), sizeof( this->_currentTime ), 0, cudaMemcpyHostToDevice ) )
+	GS_CUDA_SAFE_CALL( cudaMemcpyToSymbolAsync( k_currentTime, &(this->_currentTime), sizeof( this->_currentTime ), 0, cudaMemcpyHostToDevice ) );
 
 	CUDAPM_START_EVENT( vsrender_post_frame );
 	CUDAPM_START_EVENT( vsrender_post_frame_unmapbuffers );

@@ -11,7 +11,7 @@
 #ifndef _PROXYGEOMETRY_H_
 #define _PROXYGEOMETRY_H_
 
-#include <GL/glew.h>
+#include <GsGL/glew.h>
 #include <iostream>
 #include "ShaderManager.h"
 #include "Mesh.h"

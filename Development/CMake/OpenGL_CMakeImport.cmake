@@ -1,8 +1,6 @@
 #----------------------------------------------------------------
 # Import library
 #----------------------------------------------------------------
-	
-MESSAGE (STATUS "IMPORT : OpenGL library")
 
 #----------------------------------------------------------------
 # SET library PATH
@@ -11,45 +9,28 @@ MESSAGE (STATUS "IMPORT : OpenGL library")
 INCLUDE (GvSettings_CMakeImport)
 	
 #----------------------------------------------------------------
+# Search for OpenGL
+#----------------------------------------------------------------
+set (OpenGL_GL_PREFERENCE LEGACY)
+find_package (OpenGL REQUIRED)
+if (NOT OPENGL_FOUND)
+	message (FATAL_ERROR "system doesn't have OpenGL")
+endif()
+if (NOT OPENGL_GLU_FOUND)
+	message (FATAL_ERROR "system doesn't have GLU")
+endif()
+set (GV_OPENGL_INC "${OPENGL_INCLUDE_DIR}")
+set (GV_OPENGL_LIB "${OPENGL_gl_LIBRARY}")
+
+
+#----------------------------------------------------------------
 # Add INCLUDE library directories
 #----------------------------------------------------------------
 
-#INCLUDE_DIRECTORIES (${GV_OPENGL_INC})
-
-#----------------------------------------------------------------
-# Add LINK library directories
-#----------------------------------------------------------------
-
-#LINK_DIRECTORIES (${GV_OPENGL_LIB})
-	
-#----------------------------------------------------------------
-# Set LINK libraries if not defined by user
-#----------------------------------------------------------------
-
-IF ( "${glLib}" STREQUAL "" )
-	IF (WIN32)
-		IF ( ${GV_DESTINATION_ARCH} STREQUAL "x86" )
-			SET (glLib "opengl32")
-		ELSE ()
-			SET (glLib "opengl32")
-		ENDIF ()
-	ELSE ()
-		IF ( ${GV_DESTINATION_ARCH} STREQUAL "x86" )
-			SET (glLib "GL")
-		ELSE ()
-			SET (glLib "GL")
-		ENDIF ()
-	ENDIF ()
-ENDIF ()
+INCLUDE_DIRECTORIES (${GV_OPENGL_INC})
 
 #----------------------------------------------------------------
 # Add LINK libraries
 #----------------------------------------------------------------
 
-FOREACH (it ${glLib})
-	IF (WIN32)
-		LINK_LIBRARIES (optimized ${it} debug ${it})
-	ELSE ()
-		LINK_LIBRARIES (optimized ${it} debug ${it})
-	ENDIF ()
-ENDFOREACH (it)
+LINK_LIBRARIES (${GV_OPENGL_LIB})

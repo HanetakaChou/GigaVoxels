@@ -54,9 +54,9 @@
 
 // Cuda
 //
-// NOTE : the CUDA #include <host_defines.h> MUST be placed before the LOKI #include <loki/HierarchyGenerators.h>,
+// NOTE : the CUDA #include <cuda_runtime.h> MUST be placed before the LOKI #include <loki/HierarchyGenerators.h>,
 // because LOKI has been modified by adding the CUDA __host__ and __device__ specifiers in one of its class.
-#include <host_defines.h>
+#include <cuda_runtime.h>
 
 // Loki
 #include <loki/Typelist.h>

@@ -185,7 +185,7 @@ public:
 	/**
 	 * Launch the main GigaSpace flow sequence
 	 */
-	virtual void execute();
+	// virtual void execute();
 	virtual void execute( const float4x4& pModelMatrix, const float4x4& pViewMatrix, const float4x4& pProjectionMatrix, const int4& pViewport );
 	
 	/**

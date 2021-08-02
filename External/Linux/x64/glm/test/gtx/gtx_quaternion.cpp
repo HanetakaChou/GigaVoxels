@@ -7,9 +7,9 @@
 // File    : test/gtx/quaternion.cpp
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-#include <glm/glm.hpp>
-#include <glm/gtc/epsilon.hpp>
-#include <glm/gtx/quaternion.hpp>
+#include <gsglm/glm.hpp>
+#include <gsglm/gtc/epsilon.hpp>
+#include <gsglm/gtx/quaternion.hpp>
 
 int test_quat_fastMix()
 {

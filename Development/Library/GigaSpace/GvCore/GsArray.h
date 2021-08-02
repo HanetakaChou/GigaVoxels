@@ -56,7 +56,7 @@
 
 // Cuda
 #include <cuda_runtime.h>
-#include <host_defines.h>
+#include <cuda_runtime.h>
 #include <vector_types.h> 
 #include <driver_types.h>
 #include <driver_functions.h>

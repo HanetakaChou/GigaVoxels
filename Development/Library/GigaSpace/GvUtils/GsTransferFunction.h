@@ -52,6 +52,7 @@
 // Cuda
 #include <vector_types.h>
 #include <driver_types.h>
+#include <texture_types.h>
 
 // STL
 #include <string>

@@ -51,11 +51,11 @@
 ////#include "GvRendering/GsRendererHelpersKernel.h"
 //
 //// Cuda
-//#include <host_defines.h>
+//#include <cuda_runtime.h>
 //#include <vector_types.h>
 //#include <texture_types.h>
 //#include <surface_types.h>
-//#include <device_functions.h>
+//#include <cuda_runtime.h>
 //#include <cuda_texture_types.h>
 //#include <cuda_surface_types.h>
 //#include <texture_fetch_functions.h>

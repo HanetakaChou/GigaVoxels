@@ -7,8 +7,8 @@
 // File    : test/gtc/matrix_transform.cpp
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
+#include <gsglm/glm.hpp>
+#include <gsglm/gtc/matrix_transform.hpp>
 
 int main()
 {

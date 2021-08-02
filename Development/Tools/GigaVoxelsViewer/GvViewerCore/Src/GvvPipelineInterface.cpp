@@ -45,7 +45,7 @@
 #include "GvvMeshInterface.h"
 
 // GLM
-#include <glm/gtc/type_ptr.hpp>
+#include <gsglm/gtc/type_ptr.hpp>
 
 /******************************************************************************
  ****************************** NAMESPACE SECTION *****************************

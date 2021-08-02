@@ -166,7 +166,7 @@ bool GsGraphicsInteroperabiltyHandler::connect( GraphicsResourceSlot pSlot, GLui
 	graphicsResourceInfo.first = pSlot;
 
 	GsGraphicsResource* graphicsResource = new GsGraphicsResource();
-	graphicsResourceInfo.second = graphicsResource;			// utiliser l'ID des graphics resource à la place ??
+	graphicsResourceInfo.second = graphicsResource;			// utiliser l'ID des graphics resource ï¿½ la place ??
 
 	// Retrieve flags
 	unsigned int flags = cudaGraphicsRegisterFlagsNone;
@@ -219,7 +219,7 @@ bool GsGraphicsInteroperabiltyHandler::connect( GraphicsResourceSlot pSlot, GLui
 	graphicsResourceInfo.first = pSlot;
 
 	GsGraphicsResource* graphicsResource = new GsGraphicsResource();
-	graphicsResourceInfo.second = graphicsResource;			// utiliser l'ID des graphics resource à la place ??
+	graphicsResourceInfo.second = graphicsResource;			// utiliser l'ID des graphics resource ï¿½ la place ??
 
 	//_graphicsResources[ index ]->_isRegistered;
 	//_graphicsResources[ index ]->unregister();
@@ -357,7 +357,7 @@ bool GsGraphicsInteroperabiltyHandler::mapResources()
 		}*/
 	}
 
-	return false;
+	return true;
 }
 
 /******************************************************************************

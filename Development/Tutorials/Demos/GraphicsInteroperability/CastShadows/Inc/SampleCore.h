@@ -61,7 +61,7 @@
 #include <loki/Typelist.h>
 
 // OpenGL
-#include <GL/glew.h>
+#include <GsGL/glew.h>
 
 // QGLViewer
 #include <QGLViewer/qglviewer.h>

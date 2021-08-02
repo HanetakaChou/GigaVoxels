@@ -116,20 +116,20 @@ Most important parameter is the "Set your compute capability version". Several o
 ---------- Project(s) generation ----------
 
 PRE-REQUISITES : need to compile cudpp and glew in our local directory
-=> Install\Linux\install.sh (this will generate all Makefiles)
-=> Install\Linux\build.sh (this will launch compilation for all projects)
+=> Install/Linux/install.sh (this will generate all Makefiles)
+=> Install/Linux/build.sh (this will launch compilation for all projects)
 ---- in the build.sh are also the compilation of cudpp and glew, then copy in our local directory External\Linux\x64
 
 Once it is done, you can also use the following method to generate and compile :
 (in fact, the build.sh is mandatory to first compile and generate cudpp and glew)
 
 [ 2 ]
-To be able to generate the projects, go into the Install\Linux directory
+To be able to generate the projects, go into the Install/Linux directory
 
 NOTE : Check that files have execution mode with "ls -l" and change them with the help of a "chmod" command
 
 [ 3 ] - Library
-- launch the script "makeLibrary.sh" (Install\Linux\makeLibrary.sh)
+- launch the script "makeLibrary.sh" (Install/Linux/makeLibrary.sh)
 - The "makeLibrary.sh" generate a root "Generated_Linux" directory where you can find the generated Makefile (in Generated_VC10_x64\Library)
 
 [ 4 ] - Demos

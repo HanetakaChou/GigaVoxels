@@ -7,8 +7,8 @@
 // File    : test/gtc/swizzle.cpp
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-#include <glm/glm.hpp>
-#include <glm/gtc/swizzle.hpp>
+#include <gsglm/glm.hpp>
+#include <gsglm/gtc/swizzle.hpp>
 
 int test_swizzle_vec4_ref_dynamic()
 {

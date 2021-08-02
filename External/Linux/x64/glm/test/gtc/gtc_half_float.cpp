@@ -27,8 +27,8 @@
 ///////////////////////////////////////////////////////////////////////////////////
 
 
-#include <glm/glm.hpp>
-#include <glm/gtc/half_float.hpp>
+#include <gsglm/glm.hpp>
+#include <gsglm/gtc/half_float.hpp>
 
 int test_half_precision_scalar()
 {

@@ -2,13 +2,28 @@
 # Import library
 #----------------------------------------------------------------
 
-MESSAGE (STATUS "IMPORT : nvTools library")
-
 #----------------------------------------------------------------
 # SET library PATH
 #----------------------------------------------------------------
 
 INCLUDE (GvSettings_CMakeImport)
+
+#----------------------------------------------------------------
+# LINUX Operating System
+#----------------------------------------------------------------
+
+if (UNIX)
+
+elseif (WIN32)
+
+#----------------------------------------------------------------
+# NV TOOLS library settings
+#----------------------------------------------------------------
+
+set (GV_NVTOOLS_RELEASE "${CUDA_TOOLKIT_ROOT_DIR}/../../../NVIDIA Corporation/NvToolsExt")
+set (GV_NVTOOLS_INC "${GV_NVTOOLS_RELEASE}/include")
+set (GV_NVTOOLS_LIB "${GV_NVTOOLS_RELEASE}/lib")
+set (GV_NVTOOLS_BIN "${GV_NVTOOLS_RELEASE}/bin")
 
 #----------------------------------------------------------------
 # Add INCLUDE library directories
@@ -20,48 +35,31 @@ INCLUDE_DIRECTORIES (${GV_NVTOOLS_INC})
 # Add LINK library directories
 #----------------------------------------------------------------
 
-IF (WIN32)
-	IF ( ${GV_DESTINATION_ARCH} STREQUAL "x86" )
-		LINK_DIRECTORIES ("${GV_NVTOOLS_LIB}/Win32")
-	ELSE ()
-		LINK_DIRECTORIES ("${GV_NVTOOLS_LIB}/x64")
-	ENDIF ()
+IF ( ${GV_DESTINATION_ARCH} STREQUAL "x86" )
+	LINK_DIRECTORIES ("${GV_NVTOOLS_LIB}/Win32")
 ELSE ()
-#	IF ( ${GV_DESTINATION_ARCH} STREQUAL "x86" )
-#		LINK_DIRECTORIES ("${GV_NVTOOLS_LIB}/Win32")
-#	ELSE ()
-#		LINK_DIRECTORIES ("${GV_NVTOOLS_LIB}/x64")
-#	ENDIF ()
+	LINK_DIRECTORIES ("${GV_NVTOOLS_LIB}/x64")
 ENDIF ()
 	
 #----------------------------------------------------------------
-# Set LINK libraries if not defined by user
+# Set LINK libraries
 #----------------------------------------------------------------
 
-IF ( "${nvtoolsLib}" STREQUAL "" )
-	IF (WIN32)
-		IF ( ${GV_DESTINATION_ARCH} STREQUAL "x86" )
-			SET (nvtoolsLib "nvToolsExt32_1")
-		ELSE ()
-			SET (nvtoolsLib "nvToolsExt64_1")
-		ENDIF ()
-	ELSE ()
-#		IF ( ${GV_DESTINATION_ARCH} STREQUAL "x86" )
-#			SET (nvtoolsLib "assimp")
-#		ELSE ()
-#			SET (nvtoolsLib "assimp")
-#		ENDIF ()
-	ENDIF ()
+IF ( ${GV_DESTINATION_ARCH} STREQUAL "x86" )
+	SET (nvtoolsLib "nvToolsExt32_1")
+ELSE ()
+	SET (nvtoolsLib "nvToolsExt64_1")
 ENDIF ()
 
 #----------------------------------------------------------------
 # Add LINK libraries
 #----------------------------------------------------------------
 
-FOREACH (it ${nvtoolsLib})
-	IF (WIN32)
-		LINK_LIBRARIES (optimized ${it} debug ${it})
-	ELSE ()
-#		LINK_LIBRARIES (optimized ${it} debug ${it})
-	ENDIF ()
-ENDFOREACH (it)
+LINK_LIBRARIES (optimized ${it} debug ${it})
+
+else (UNIX)
+
+message (FATAL_ERROR "Unknown operating system ")
+
+endif (UNIX)
+

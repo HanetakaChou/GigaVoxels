@@ -230,7 +230,7 @@ inline uint ProducerKernel< TDataStructureType >
 	uint3 elemSize = BrickRes::get() + make_uint3( 2 * BorderSize );
 
 	// Retrieve coaser brick position in pool
-	__shared__ uint smCoaserBrickPositionInPool;
+	// __shared__ uint smCoaserBrickPositionInPool;
 	__shared__ bool smUseCoaserLevel;
 	__shared__ GvStructure::GsNode smParentNode;
 	__shared__ float3 smBrickCenter;

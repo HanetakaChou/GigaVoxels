@@ -52,7 +52,7 @@
 #include "GvRendering/GsGraphicsResource.h"
 
 // Cuda
-#include <host_defines.h>
+#include <cuda_runtime.h>
 
 // Cutil
 //#include <helper_math.h>
@@ -224,13 +224,13 @@ struct GsRendererContext
 	unsigned int _inputColorTextureOffset;
 	unsigned int _inputDepthTextureOffset;
 
-	// TO DO : à deplacer en dehors du context ?
+	// TO DO : ï¿½ deplacer en dehors du context ?
 	/**
 	 * Specify clear values for the color buffers
 	 */
 	uchar4 _clearColor;
 
-	// TO DO : à deplacer en dehors du context ?
+	// TO DO : ï¿½ deplacer en dehors du context ?
 	/**
 	 * Specify the clear value for the depth buffer
 	 */

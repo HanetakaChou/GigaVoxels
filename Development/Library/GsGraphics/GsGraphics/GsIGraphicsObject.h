@@ -47,7 +47,7 @@
  ******************************************************************************/
 
 // GL
-#include <GL/glew.h>
+#include <GsGL/glew.h>
 
 // GigaSpace
 #include "GsGraphics/GsGraphicsCoreConfig.h"
@@ -59,7 +59,7 @@
 #include <map>
 
 // glm
-#include <glm/glm.hpp>
+#include <gsglm/glm.hpp>
 
 /******************************************************************************
  ************************* DEFINE AND CONSTANT SECTION ************************

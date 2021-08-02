@@ -2,13 +2,19 @@
 # Import library
 #----------------------------------------------------------------
 	
-MESSAGE (STATUS "IMPORT : Qtfe library")
-
 #----------------------------------------------------------------
 # SET library PATH
 #----------------------------------------------------------------
 
 INCLUDE (GvSettings_CMakeImport)
+
+#----------------------------------------------------------------
+# QTFE library settings
+#----------------------------------------------------------------
+
+set (GV_QTFE_RELEASE "${GV_EXTERNAL}/Qtfe")
+set (GV_QTFE_INC "${GV_QTFE_RELEASE}/include")
+set (GV_QTFE_LIB "${GV_QTFE_RELEASE}/lib")
 	
 #----------------------------------------------------------------
 # Add INCLUDE library directories
@@ -23,33 +29,17 @@ INCLUDE_DIRECTORIES (${GV_QTFE_INC})
 LINK_DIRECTORIES (${GV_QTFE_LIB})
 	
 #----------------------------------------------------------------
-# Set LINK libraries if not defined by user
+# Set LINK libraries
 #----------------------------------------------------------------
 	
-IF ( "${qtfeLib}" STREQUAL "" )
-	IF (WIN32)
-		IF ( ${GV_DESTINATION_ARCH} STREQUAL "x86" )
-			SET (qtfeLib "Qtfe")
-		ELSE ()
-			SET (qtfeLib "Qtfe")
-		ENDIF ()
-	ELSE ()
-		IF ( ${GV_DESTINATION_ARCH} STREQUAL "x86" )
-			SET (qtfeLib "Qtfe")
-		ELSE ()
-			SET (qtfeLib "Qtfe")
-		ENDIF ()
-	ENDIF ()
-ENDIF ()
+SET (qtfeLib "Qtfe")
 
 #----------------------------------------------------------------
 # Add LINK libraries
 #----------------------------------------------------------------
 
-FOREACH (it ${qtfeLib})
-	IF (WIN32)
-		LINK_LIBRARIES (optimized ${it} debug ${it}.d)
-	ELSE ()
-		LINK_LIBRARIES (optimized ${it} debug ${it}d)
-	ENDIF ()
-ENDFOREACH (it)
+IF (WIN32)
+	LINK_LIBRARIES (optimized ${qtfeLib} debug ${qtfeLib}.d)
+ELSE ()
+	LINK_LIBRARIES (optimized ${qtfeLib} debug ${qtfeLib}d)
+ENDIF ()

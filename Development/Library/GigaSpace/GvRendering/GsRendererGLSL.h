@@ -51,7 +51,7 @@
 #include "GvRendering/GsRenderer.h"
 
 // OpenGL
-#include <GL/glew.h>
+#include <GsGL/glew.h>
 
 // Cuda
 #include <vector_types.h>

@@ -1,65 +1,46 @@
-#!/bin/sh
+#!/bin/bash
+
 # Exit script on error
 set -e
 
+if test \( $# -ne 1 \);
+then
+    echo "Usage: build.sh config platform arch"
+    echo ""
+    echo "Configs:"
+    echo "  debug   -   build with the debug configuration"
+    echo "  release -   build with the release configuration"
+    echo ""
+    exit 1
+fi
+
+if test \( \( -n "$1" \) -a \( "$1" = "debug" \) \);then 
+    CMAKE_CONFIG_TYPE_ARG="--config DEBUG"
+elif test \( \( -n "$1" \) -a \( "$1" = "release" \) \);then
+    CMAKE_CONFIG_TYPE_ARG="--config RELEASE"
+else
+    echo "The config \"$1\" is not supported!"
+    echo ""
+    echo "Configs:"
+    echo "  debug   -   build with the debug configuration"
+    echo "  release -   build with the release configuration"
+    echo ""
+    exit 1
+fi
+
 # Set the working directory correctly
-cd "$(dirname "$0")"
-GV_ROOT=`(cd ../.. && pwd)`
+GV_ROOT="$(cd "$(dirname "$0")/../.." 1>/dev/null 2>/dev/null && pwd)"
 
-usage() {
-	echo Usage :
-	echo "$0 [N_PROCS]"
-}
-
-# Check arguments
-if [ $# -eq 1 ]; then
-	# Check $1 is a number
-	case "$1" in
-		''|*[!0-9]*) 
-			echo "Error $1 is not a number."
-			usage $0
-			exit 1
-		;;
-		*);;
-	esac
-	echo "$1" threads will be used to compile.
-	N_PROCS=$1
-elif [ $# -ge 2 ]; then
-	echo "Error, too many arguments."
-	usage $0
-	exit 1
-else 
-	echo "No number provided, default number of processors (4) will be used"
-	N_PROCS=4
-fi;
+# Use NVCC matched CXX
+export CC=clang-8
+export CXX=clang++-8
+export CUDAHOSTCXX=clang++-8
 
 # **************************************************************************
-# BUILD EVERYTHING
+# BUILD GigaSpace
 # **************************************************************************
 
-# Build externals libraries - cudpp
-rm -rf $GV_ROOT/External/CommonLibraries/cudpp-2.1/build
-mkdir $GV_ROOT/External/CommonLibraries/cudpp-2.1/build
-cd $GV_ROOT/External/CommonLibraries/cudpp-2.1/build
-cmake ..
-make -j "$N_PROCS"
-
-mkdir -p $GV_ROOT/External/Linux/x64/cudpp/lib
-mkdir -p $GV_ROOT/External/Linux/x64/cudpp/include
-cp $GV_ROOT/External/CommonLibraries/cudpp-2.1/build/lib/libcudpp.so $GV_ROOT/External/Linux/x64/cudpp/lib
-cp $GV_ROOT/External/CommonLibraries/cudpp-2.1/include/* $GV_ROOT/External/Linux/x64/cudpp/include
-
-# Build externals libraries - glew
-cd $GV_ROOT/External/CommonLibraries/glew-1.12.0
-chmod +x config/config.guess
-make -j "$N_PROCS"
-mkdir -p $GV_ROOT/External/Linux/x64/glew/lib
-mkdir -p $GV_ROOT/External/Linux/x64/glew/include/GL
-cp $GV_ROOT/External/CommonLibraries/glew-1.12.0/lib/libGLEW.a $GV_ROOT/External/Linux/x64/glew/lib
-cp $GV_ROOT/External/CommonLibraries/glew-1.12.0/include/GL/* $GV_ROOT/External/Linux/x64/glew/include/GL
-
-# Build GigaSpace
-make -i -C $GV_ROOT/Generated_Linux/Library -j "$N_PROCS"
-make -i -C $GV_ROOT/Generated_Linux/Tools -j "$N_PROCS"
-make -i -C $GV_ROOT/Generated_Linux/Tutorials/Demos -j "$N_PROCS"
-make -i -C $GV_ROOT/Generated_Linux/Tutorials/ViewerPlugins -j "$N_PROCS"
+cmake --build "${GV_ROOT}/Generated_Linux/Library" ${CMAKE_CONFIG_TYPE_ARG} -- -j
+cmake --build "${GV_ROOT}/Generated_Linux/Tools" ${CMAKE_CONFIG_TYPE_ARG} -- -j
+cmake --build "${GV_ROOT}/Generated_Linux/Tutorials/Demos" ${CMAKE_CONFIG_TYPE_ARG} -- -j
+cmake --build "${GV_ROOT}/Generated_Linux/Tutorials/ViewerPlugins" ${CMAKE_CONFIG_TYPE_ARG} #-- -j

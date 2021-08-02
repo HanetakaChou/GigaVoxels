@@ -29,10 +29,10 @@
 #include <iostream>
 
 // glm
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtx/transform2.hpp>
-#include <glm/gtx/projection.hpp>
-#include <glm/gtc/type_ptr.hpp>
+#include <gsglm/gtc/matrix_transform.hpp>
+#include <gsglm/gtx/transform2.hpp>
+#include <gsglm/gtx/projection.hpp>
+#include <gsglm/gtc/type_ptr.hpp>
 
 // Qt
 #include <QString>
@@ -452,8 +452,8 @@ inline void Producer< TDataStructureType, TDataProductionManager >
 		float3 brickSize = nodeSize + 2 * make_float3( BorderSize ) * levelResInv;
 
 		// Iterate through current brick's voxels and fill data in cache (i.e data pool)
-		uint3 brickOffset;
-		uint brickOffsetLinear = 0;
+		// uint3 brickOffset;
+		// uint brickOffsetLinear = 0;
 		intersectMesh( brickPos, brickSize.x, brickSize.y, brickSize.z, locDepth, locCode, addressBrick );
 	}
 

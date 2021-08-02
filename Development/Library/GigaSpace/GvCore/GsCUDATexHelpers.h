@@ -53,7 +53,7 @@
 #include "GvCore/GsCoreConfig.h"
 
 // Cuda
-#include <host_defines.h>
+#include <cuda_runtime.h>
 #include <texture_fetch_functions.h>
 
 /******************************************************************************

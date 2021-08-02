@@ -55,7 +55,7 @@
 #include <GvUtils/GsForwardDeclarationHelper.h>
 
 // OpenGL
-#include <GL/glew.h>
+#include <GsGL/glew.h>
 
 // Cuda SDK
 #include <helper_math.h>

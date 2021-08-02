@@ -46,7 +46,7 @@
  ******************************* INCLUDE SECTION ******************************
  ******************************************************************************/
 
-#include <GL/glew.h>
+#include <GsGL/glew.h>
 #include <iostream>
 #include <fstream>
 #include <stdlib.h>

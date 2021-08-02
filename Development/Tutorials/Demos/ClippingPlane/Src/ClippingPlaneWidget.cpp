@@ -112,7 +112,11 @@
 //	glDisable( GL_LIGHTING );
 //
 //	float pos[ 4 ] = { 1.0f, 1.0f, 1.0f, 1.0f };
-//	_light1->getPosition( pos[ 0 ], pos[ 1 ], pos[ 2 ] );
+//	qreal x,y,z;
+//	_light1->getPosition( x, y, z );
+//	pos[ 0 ] = x;
+//	pos[ 1 ] = y;
+//	pos[ 2 ] = z;
 //
 //	glLightfv( GL_LIGHT1, GL_POSITION, pos );
 //	glEnable( GL_LIGHT1 ); // must be enabled for drawLight()

@@ -57,7 +57,7 @@
 
 // Cuda
 #include <vector_types.h>
-#include <device_functions.h>
+#include <cuda_runtime.h>
 #include <cuda_texture_types.h>
 #include <cuda_surface_types.h>
 #include <surface_functions.h>
@@ -266,7 +266,7 @@ surface< void, cudaSurfaceType2D > _depthSurface;
 	// * @param ...
 	// ******************************************************************************/
 	//// ATTENTION
-	//// il faut faut gérer le stencil buffer, refaire un getDepth pour savoir ce qu'il y avant et faire un OU logique avec les 24 bits du stencil !!
+	//// il faut faut gï¿½rer le stencil buffer, refaire un getDepth pour savoir ce qu'il y avant et faire un OU logique avec les 24 bits du stencil !!
 	//__device__
 	//__forceinline__ void setFrameDepthOut( const uint2 pixelCoords, const float d )
 	//{

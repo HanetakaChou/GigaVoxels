@@ -54,7 +54,7 @@
 #include "GvRendering/GsSamplerKernel.h"
 
 // Cuda
-#include <host_defines.h>
+#include <cuda_runtime.h>
 #include <vector_types.h>
 
 /******************************************************************************

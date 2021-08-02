@@ -48,7 +48,7 @@ set(HFILES_PUBLIC
 source_group("CUDA Source Files" FILES ${CUFILES})
 source_group("CUDA Header Files" FILES ${CUHFILES})
 
-set(GENCODE_SM20 -gencode=arch=compute_20,code=sm_20 -gencode=arch=compute_20,code=compute_20)
+#set(GENCODE_SM20 -gencode=arch=compute_20,code=sm_20 -gencode=arch=compute_20,code=compute_20)
 
 if (CUDA_VERBOSE_PTXAS)
   set(VERBOSE_PTXAS --ptxas-options=-v)
@@ -64,7 +64,7 @@ cuda_add_library(cudpp_hash ${LIB_TYPE}
   ${CUHFILES}
   ${HFILES_PUBLIC}
   ${CUFILES} 
-  OPTIONS ${GENCODE_SM20} ${VERBOSE_PTXAS}
+  OPTIONS ${VERBOSE_PTXAS} #${GENCODE_SM20} 
   )
   
 target_link_libraries(cudpp_hash cudpp)

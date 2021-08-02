@@ -51,7 +51,7 @@
 #include "GvCore/GsVectorTypesExt.h"
 
 // CUDA
-#include <host_defines.h>
+#include <cuda_runtime.h>
 
 /******************************************************************************
  ************************* DEFINE AND CONSTANT SECTION ************************

@@ -38,7 +38,7 @@
 #ifndef _SHADERMANAGER_H_
 #define _SHADERMANAGER_H_
 
-#include <GL/glew.h>
+#include <GsGL/glew.h>
 #include <iostream>
 #include <fstream>
 #include <stdlib.h>

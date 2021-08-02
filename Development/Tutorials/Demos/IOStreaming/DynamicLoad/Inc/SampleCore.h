@@ -42,7 +42,7 @@
 #include <loki/Typelist.h>
 
 // OpenGL
-#include <GL/glew.h>
+#include <GsGL/glew.h>
 
 // GigaVoxels
 #include <GvCore/GsVectorTypesExt.h>
@@ -258,7 +258,7 @@ private:
 	GLuint _inputDepthBuffer;
 
 	// ...
-	// UTILISER 2 FBO et deux textures pour ne pas faire un read/write de color ùmais séper en 2 éléments !!!!!!!!!!!!!
+	// UTILISER 2 FBO et deux textures pour ne pas faire un read/write de color ï¿½mais sï¿½per en 2 ï¿½lï¿½ments !!!!!!!!!!!!!
 	// ...
 
 	/**

@@ -77,7 +77,7 @@ void collision_BBOX_VolTree(
 	   		std::vector< float > &results )
 {
 	//CUresult error;
-	cudaError_t error;
+	//cudaError_t error;
 	
 	//error = cuProfilerStart();
 	//error = cudaProfilerStart();

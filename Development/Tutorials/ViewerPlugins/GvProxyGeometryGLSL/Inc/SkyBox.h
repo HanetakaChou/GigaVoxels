@@ -36,7 +36,7 @@
  ******************************************************************************/
 
 // OpenGL
-#include <GL/glew.h>
+#include <GsGL/glew.h>
 
 // GigaVoxels
 #include <GvCore/vector_types_ext.h>

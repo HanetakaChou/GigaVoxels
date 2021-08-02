@@ -36,7 +36,7 @@
 #include <vector_types.h>
 
 // GL
-#include <GL/glew.h>
+#include <GsGL/glew.h>
 
 // Loki
 #include <loki/Typelist.h>

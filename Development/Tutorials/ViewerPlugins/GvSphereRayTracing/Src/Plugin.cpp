@@ -31,7 +31,7 @@
 #include <sstream>
 
 // OpenGL
-#include <GL/glew.h>
+#include <GsGL/glew.h>
 #include <GL/freeglut.h>
 
 // GvViewer

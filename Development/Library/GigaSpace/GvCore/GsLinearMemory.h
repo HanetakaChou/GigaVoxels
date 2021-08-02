@@ -50,7 +50,7 @@
 #include "GvCore/GsCoreConfig.h"
 
 // OpenGL
-#include <GL/glew.h>
+#include <GsGL/glew.h>
 
 // Cuda
 #include <cuda.h>

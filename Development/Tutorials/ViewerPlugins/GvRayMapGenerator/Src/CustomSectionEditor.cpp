@@ -20,11 +20,11 @@
  ******************************************************************************/
 
 // Qt
-#include <QtCore/QUrl>
-#include <QtGui/QFileDialog>
-#include <QtGui/QMessageBox>
-#include <QtGui/QVBoxLayout>
-#include <QtGui/QToolBar>
+#include <QUrl>
+#include <QFileDialog>
+#include <QMessageBox>
+#include <QVBoxLayout>
+#include <QToolBar>
 
 // GvViewer
 #include "Gvv3DWindow.h"

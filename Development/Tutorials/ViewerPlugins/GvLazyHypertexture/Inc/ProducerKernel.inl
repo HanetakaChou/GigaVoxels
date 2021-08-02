@@ -377,7 +377,7 @@ inline uint ProducerKernel< TDataStructureType >
 
 	
 	// Retrieve coaser brick position in pool
-	__shared__ uint smCoaserBrickPositionInPool;
+	//__shared__ uint smCoaserBrickPositionInPool;
 	__shared__ bool smUseCoaserLevel;
 	__shared__ GvStructure::GsNode smParentNode;
 	__shared__ float3 smBrickCenter;
@@ -389,7 +389,7 @@ inline uint ProducerKernel< TDataStructureType >
 	uint3 nodeChildCoordinates; 
 	float3 brickPosition; 
 
-	float noiseFrequency;
+	// float noiseFrequency;
 
 	if ( processID == 0 )
 	{

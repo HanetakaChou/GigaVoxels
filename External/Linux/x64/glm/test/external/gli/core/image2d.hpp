@@ -17,11 +17,11 @@
 #include <cstring>
 
 // GLM
-#include <glm/glm.hpp>
-#include <glm/gtx/number_precision.hpp>
-#include <glm/gtx/raw_data.hpp>
-#include <glm/gtx/gradient_paint.hpp>
-#include <glm/gtx/component_wise.hpp>
+#include <gsglm/glm.hpp>
+#include <gsglm/gtx/number_precision.hpp>
+#include <gsglm/gtx/raw_data.hpp>
+#include <gsglm/gtx/gradient_paint.hpp>
+#include <gsglm/gtx/component_wise.hpp>
 
 namespace gli
 {

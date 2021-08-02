@@ -31,7 +31,7 @@ THE SOFTWARE.
 GLM Usage
 --------------------------------------------------------------------------------
 GLM is a header only library, there is nothing to build, just include it.
-#include <glm/glm.hpp>
+#include <gsglm/glm.hpp>
 
 More informations in GLM manual:
 http://glm.g-truc.net/glm.pdf

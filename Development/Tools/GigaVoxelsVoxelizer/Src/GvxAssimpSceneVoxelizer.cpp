@@ -39,8 +39,6 @@
  * @version 1.0
  */
 
-#include "GvxAssimpSceneVoxelizer.h"
-
 /******************************************************************************
  ******************************* INCLUDE SECTION ******************************
  ******************************************************************************/
@@ -49,6 +47,9 @@
 #include <cassert>
 #include <iostream>
 #include <cfloat>
+
+//
+#include "GvxAssimpSceneVoxelizer.h"
 
 // Assimp
 #include <assimp/postprocess.h>

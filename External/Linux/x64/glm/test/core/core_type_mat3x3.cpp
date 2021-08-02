@@ -7,8 +7,8 @@
 // File    : test/core/type_mat3x3.cpp
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-#include <glm/glm.hpp>
-#include <glm/gtc/epsilon.hpp>
+#include <gsglm/glm.hpp>
+#include <gsglm/gtc/epsilon.hpp>
 #include <cstdio>
 
 void print(glm::dmat3 const & Mat0)

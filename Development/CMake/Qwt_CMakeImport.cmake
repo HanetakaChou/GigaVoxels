@@ -2,14 +2,26 @@
 # Import library
 #----------------------------------------------------------------
 
-MESSAGE (STATUS "IMPORT : Qwt library")
-
 #----------------------------------------------------------------
 # SET library PATH
 #----------------------------------------------------------------
 
 INCLUDE (GvSettings_CMakeImport)
-	
+
+#----------------------------------------------------------------
+# LINUX Operating System
+#----------------------------------------------------------------
+
+if (UNIX)
+
+#----------------------------------------------------------------
+# QWT library settings
+#----------------------------------------------------------------
+
+set (GV_QWT_RELEASE "/usr")
+set (GV_QWT_INC "${GV_QWT_RELEASE}/include/qwt")
+set (GV_QWT_LIB "${GV_QWT_RELEASE}/lib")
+
 #----------------------------------------------------------------
 # Add INCLUDE library directories
 #----------------------------------------------------------------
@@ -23,33 +35,53 @@ INCLUDE_DIRECTORIES (${GV_QWT_INC})
 LINK_DIRECTORIES (${GV_QWT_LIB})
 	
 #----------------------------------------------------------------
-# Set LINK libraries if not defined by user
+# Set LINK libraries
 #----------------------------------------------------------------
 
-IF ( "${qwtLib}" STREQUAL "" )
-	IF (WIN32)
-		IF ( ${GV_DESTINATION_ARCH} STREQUAL "x86" )
-			SET (qwtLib "qwt")
-		ELSE ()
-			SET (qwtLib "qwt")
-		ENDIF ()
-	ELSE ()
-		IF ( ${GV_DESTINATION_ARCH} STREQUAL "x86" )
-			SET (qwtLib "qwt")
-		ELSE ()
-			SET (qwtLib "qwt")
-		ENDIF ()
-	ENDIF ()
-ENDIF ()
-	
+SET (qwtLib "qwt-qt5")
+
 #----------------------------------------------------------------
 # Add LINK libraries
 #----------------------------------------------------------------
 
-FOREACH (it ${qwtLib})
-	IF (WIN32)
-		LINK_LIBRARIES (optimized ${it} debug ${it}d)
-	ELSE ()
-		LINK_LIBRARIES (optimized ${it} debug ${it}d)
-	ENDIF ()
-ENDFOREACH (it)
+LINK_LIBRARIES (${qwtLib})
+
+elseif (WIN32)
+
+#----------------------------------------------------------------
+# QWT library settings
+#----------------------------------------------------------------
+
+set (GV_QWT_RELEASE "${GV_EXTERNAL}/Qwt")
+set (GV_QWT_INC "${GV_QWT_RELEASE}/include")
+set (GV_QWT_LIB "${GV_QWT_RELEASE}/lib")
+
+#----------------------------------------------------------------
+# Add INCLUDE library directories
+#----------------------------------------------------------------
+
+INCLUDE_DIRECTORIES (${GV_QWT_INC})
+
+#----------------------------------------------------------------
+# Add LINK library directories
+#----------------------------------------------------------------
+
+LINK_DIRECTORIES (${GV_QWT_LIB})
+
+#----------------------------------------------------------------
+# Set LINK libraries
+#----------------------------------------------------------------
+
+SET (qwtLib "qwt")
+
+#----------------------------------------------------------------
+# Add LINK libraries
+#----------------------------------------------------------------
+
+LINK_LIBRARIES (optimized ${qwtLib} debug ${qwtLib}d)
+
+else (UNIX)
+
+message (FATAL_ERROR "Unknown operating system ")
+
+endif (UNIX)

@@ -154,16 +154,16 @@ inline void GsSimplePipeline< TShaderType, TDataStructureType, TCacheType >
 /******************************************************************************
  * Launch the main GigaSpace flow sequence
  ******************************************************************************/
-template< typename TShaderType, typename TDataStructureType, typename TCacheType >
-inline void GsSimplePipeline< TShaderType, TDataStructureType, TCacheType >
-::execute()
-{
+//template< typename TShaderType, typename TDataStructureType, typename TCacheType >
+//inline void GsSimplePipeline< TShaderType, TDataStructureType, TCacheType >
+//::execute()
+//{
 	// [ 1 ] - Rendering stage
 	//_renderer->render();
 
 	// [ 2 ] - Data Production Management stage
 	//_cache->handleRequests();
-}
+//}
 
 /******************************************************************************
  * Launch the main GigaSpace flow sequence

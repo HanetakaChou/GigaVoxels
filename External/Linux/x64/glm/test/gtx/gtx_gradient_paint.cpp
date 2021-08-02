@@ -7,8 +7,8 @@
 // File    : test/gtx/gradient_paint.cpp
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-#include <glm/glm.hpp>
-#include <glm/gtx/gradient_paint.hpp>
+#include <gsglm/glm.hpp>
+#include <gsglm/gtx/gradient_paint.hpp>
 
 int test_radialGradient()
 {

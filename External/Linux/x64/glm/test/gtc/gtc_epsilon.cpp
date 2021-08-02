@@ -7,10 +7,10 @@
 // File    : test/gtc/epsilon.cpp
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-#include <glm/glm.hpp>
-#include <glm/gtc/half_float.hpp>
-#include <glm/gtc/epsilon.hpp>
-#include <glm/gtc/constants.hpp>
+#include <gsglm/glm.hpp>
+#include <gsglm/gtc/half_float.hpp>
+#include <gsglm/gtc/epsilon.hpp>
+#include <gsglm/gtc/constants.hpp>
 
 int test_defined()
 {

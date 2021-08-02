@@ -32,7 +32,7 @@
 #ifndef _SAMPLEVIEWER_H_
 #define _SAMPLEVIEWER_H_
 
-#include <GL/glew.h>
+#include <GsGL/glew.h>
 
 #include <QGLViewer/qglviewer.h>
 #include <QKeyEvent>

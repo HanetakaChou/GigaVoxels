@@ -50,7 +50,7 @@
 #include "GsGraphics/GsGraphicsCoreConfig.h"
 
 // OpenGL
-#include <GL/glew.h>
+#include <GsGL/glew.h>
 
 // System
 #include <string>

@@ -54,7 +54,7 @@
 #include <vector>
 
 // glm
-#include <glm/glm.hpp>
+#include <gsglm/glm.hpp>
 
 /******************************************************************************
  ************************* DEFINE AND CONSTANT SECTION ************************

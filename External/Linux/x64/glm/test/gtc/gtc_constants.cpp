@@ -7,8 +7,8 @@
 // File    : test/gtc/constants.cpp
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-#include <glm/glm.hpp>
-#include <glm/gtc/constants.hpp>
+#include <gsglm/glm.hpp>
+#include <gsglm/gtc/constants.hpp>
 
 int test_epsilon()
 {

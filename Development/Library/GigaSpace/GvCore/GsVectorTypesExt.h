@@ -50,7 +50,9 @@
 #include "GvCore/GsCoreConfig.h"
 
 #include <cuda.h>	// without this include, Linux has problem to compile. TO DO : resolve this.
-#include <device_functions.h> // float <-> half
+#define CUDA_NO_HALF 1
+#include <cuda_fp16.h>
+#include <cuda_runtime.h> // float <-> half
 #include <vector_types.h>
 #include <vector_functions.h>
 //#include <driver_types.h>

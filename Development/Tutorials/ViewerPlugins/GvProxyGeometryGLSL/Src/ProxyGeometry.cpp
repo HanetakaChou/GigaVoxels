@@ -42,9 +42,9 @@
 #include "Mesh.h"
 
 // glm
-//#include <glm/gtc/matrix_transform.hpp>
-//#include <glm/gtx/transform2.hpp>
-//#include <glm/gtx/projection.hpp>
+//#include <gsglm/gtc/matrix_transform.hpp>
+//#include <gsglm/gtx/transform2.hpp>
+//#include <gsglm/gtx/projection.hpp>
 
 // Cuda
 #include <vector_types.h>
@@ -196,7 +196,7 @@ void ProxyGeometry::render( const float4x4& pModelViewMatrix, const float4x4& pP
 
 	// Reset color and depth buffers of FBO
 	glClearDepth( 1.0f );
-	glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );	// glclear() peut être factorisé pour les 2 colorAttachment : 0_1
+	glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );	// glclear() peut ï¿½tre factorisï¿½ pour les 2 colorAttachment : 0_1
 	// Specify the value used for depth buffer comparisons
 	// - GL_LESS : passes if the incoming depth value is less than the stored depth value
 	glDepthFunc( GL_LESS );

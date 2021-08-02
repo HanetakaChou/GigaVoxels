@@ -49,4 +49,4 @@ INCLUDE (GPU_COMPUTING_SDK_CMakeImport)
 # Main CMake file used for project generation
 #----------------------------------------------------------------
 
-INCLUDE (GV_CMakeCommon)
+INCLUDE (GV_CMakeCommonLibrary)

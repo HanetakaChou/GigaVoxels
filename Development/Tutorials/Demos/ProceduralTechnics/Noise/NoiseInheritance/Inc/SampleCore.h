@@ -61,7 +61,7 @@
 #include <loki/Typelist.h>
 
 // GL
-#include <GL/glew.h>
+#include <GsGL/glew.h>
 
 /******************************************************************************
  ************************* DEFINE AND CONSTANT SECTION ************************

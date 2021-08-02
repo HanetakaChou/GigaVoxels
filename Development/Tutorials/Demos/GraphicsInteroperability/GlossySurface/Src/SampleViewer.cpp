@@ -121,7 +121,11 @@ void SampleViewer::draw()
 	glDisable(GL_LIGHTING);
 
 	float pos[4] = { 1.0f, 1.0f, 1.0f, 1.0f };
-	mLight1->getPosition(pos[0], pos[1], pos[2]);
+	qreal x,y,z;
+	mLight1->getPosition( x, y, z );
+	pos[ 0 ] = x;
+	pos[ 1 ] = y;
+	pos[ 2 ] = z;
 
 	float3 lightPos = make_float3( pos[ 0 ], pos[ 1 ], pos[ 2 ] );
 	qglviewer::Vec light = qglviewer::Vec(lightPos.x, lightPos.y, lightPos.z);

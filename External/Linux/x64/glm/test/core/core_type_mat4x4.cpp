@@ -8,8 +8,8 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 //#define GLM_PRECISION_HIGHP_FLOAT
-#include <glm/glm.hpp>
-#include <glm/gtc/epsilon.hpp>
+#include <gsglm/glm.hpp>
+#include <gsglm/gtc/epsilon.hpp>
 #include <cstdio>
 
 void print(glm::dmat4 const & Mat0)

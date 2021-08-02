@@ -17,11 +17,6 @@ set (CMAKE_COLOR_MAKEFILE ON)
 # Project
 #----------------------------------------------------------------
 
-# Invite message
-MESSAGE ( STATUS "-----------------------------------------------------" )
-MESSAGE ( STATUS "- PROJECT GENERATION : GigaVoxels Tutorials" )
-MESSAGE ( STATUS "-----------------------------------------------------" )
-
 # Project name
 project (ViewerPluginTutorials)
 
@@ -37,6 +32,8 @@ INCLUDE (GvSettings_CMakeImport)
 # Initialize some environment variables
 #----------------------------------------------------------------
 SET (RELEASE_BIN_DIR ${GV_RELEASE}/Bin)
+SET (RELEASE_LIB_DIR ${GV_RELEASE}/Lib)
+SET (RELEASE_INC_DIR ${GV_RELEASE}/Inc)
 
 #########################################################################
 # Add all the sub projects

@@ -2,13 +2,22 @@
 # Import library
 #----------------------------------------------------------------
 
-MESSAGE (STATUS "IMPORT : Loki library")
-
 #----------------------------------------------------------------
 # SET library PATH
 #----------------------------------------------------------------
 
 INCLUDE (GvSettings_CMakeImport)
+
+#----------------------------------------------------------------
+# LOKI library settings
+#
+# NOTE
+# GigaVoxels uses a modified version of the library in order to
+# be able to use it in device code (i.e. on GPU).
+#----------------------------------------------------------------
+
+set (GV_LOKI_RELEASE "${GV_EXTERNAL}/Loki")
+set (GV_LOKI_INC "${GV_LOKI_RELEASE}/include")
 	
 #----------------------------------------------------------------
 # Add INCLUDE library directories

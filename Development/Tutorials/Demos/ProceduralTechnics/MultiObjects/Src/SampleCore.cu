@@ -130,7 +130,7 @@ void MyPipeline< TShaderType, TDataStructureType, TCacheType >
 		unsigned int maxVolTreeDepth = 5;
 		GS_CUDA_SAFE_CALL( cudaMemcpyToSymbol( k_maxVolTreeDepth, &maxVolTreeDepth, sizeof( maxVolTreeDepth ), 0, cudaMemcpyHostToDevice) );
 		unsigned int _producerIndex = 0;
-		unsigned int objectID = 1; // BEWARE : it must be différent from 0 (or use signed int instead)
+		// unsigned int objectID = 1; // BEWARE : it must be différent from 0 (or use signed int instead)
 		this->setCurrentProducer( this->_producers[ _producerIndex ] );
 		this->_dataStructure->volumeTreeKernel._rootAddress = ( _producerIndex + 1 ) * /*NodeTileRes::getNumElements()*/8;
 #ifdef GS_USE_MULTI_OBJECTS
@@ -144,7 +144,7 @@ void MyPipeline< TShaderType, TDataStructureType, TCacheType >
 		_producerIndex = 1;
 		this->setCurrentProducer( this->_producers[ _producerIndex ] );
 		this->_dataStructure->volumeTreeKernel._rootAddress = ( _producerIndex + 1 ) * /*NodeTileRes::getNumElements()*/8;
-		objectID = 2; // BEWARE : it must be différent from 0 (or use signed int instead)
+		// objectID = 2; // BEWARE : it must be différent from 0 (or use signed int instead)
 #ifdef GS_USE_MULTI_OBJECTS
 		GS_CUDA_SAFE_CALL( cudaMemcpyToSymbolAsync( k_objectID, &/*_producerIndex*/objectID, sizeof( unsigned int ), 0, cudaMemcpyHostToDevice ) );
 #endif

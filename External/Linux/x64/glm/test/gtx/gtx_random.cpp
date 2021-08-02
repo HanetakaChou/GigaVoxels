@@ -7,9 +7,9 @@
 // File    : test/gtx/random.cpp
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-#include <glm/glm.hpp>
-#include <glm/gtx/random.hpp>
-#include <glm/gtx/epsilon.hpp>
+#include <gsglm/glm.hpp>
+#include <gsglm/gtx/random.hpp>
+#include <gsglm/gtx/epsilon.hpp>
 #include <iostream>
 
 int test_signedRand1()

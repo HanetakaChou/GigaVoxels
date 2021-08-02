@@ -7,8 +7,8 @@
 // File    : test/gtx/gtx_multiple.cpp
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-#include <glm/glm.hpp>
-#include <glm/gtx/multiple.hpp>
+#include <gsglm/glm.hpp>
+#include <gsglm/gtx/multiple.hpp>
 
 int test_higher()
 {

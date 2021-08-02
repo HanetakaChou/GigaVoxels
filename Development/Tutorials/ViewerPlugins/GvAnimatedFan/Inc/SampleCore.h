@@ -27,7 +27,7 @@
 #include <loki/Typelist.h>
 
 // OpenGL
-#include <GL/glew.h>
+#include <GsGL/glew.h>
 
 // GigaVoxels
 #include <GvCore/GsVectorTypesExt.h>

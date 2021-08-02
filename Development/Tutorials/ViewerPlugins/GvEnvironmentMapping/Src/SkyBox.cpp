@@ -34,10 +34,10 @@
 #include <QGLWidget>
 
 // glm
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtx/transform2.hpp>
-#include <glm/gtx/projection.hpp>
-#include <glm/gtc/type_ptr.hpp>
+#include <gsglm/gtc/matrix_transform.hpp>
+#include <gsglm/gtx/transform2.hpp>
+#include <gsglm/gtx/projection.hpp>
+#include <gsglm/gtc/type_ptr.hpp>
 
 // STL
 #include <vector>

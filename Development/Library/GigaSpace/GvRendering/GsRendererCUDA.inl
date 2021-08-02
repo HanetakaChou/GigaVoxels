@@ -566,21 +566,21 @@ bool GsRendererCUDA< TVolumeTreeType, TVolumeTreeCacheType, TSampleShader >
 			switch ( graphicsResourceSlot )
 			{
 				case GsGraphicsInteroperabiltyHandler::eColorReadSlot:
-					cudaBindTextureToArray( GvRendering::_inputColorTexture, imageArray );
+					GS_CUDA_SAFE_CALL(cudaBindTextureToArray( GvRendering::_inputColorTexture, imageArray ));
 					break;
 
 				case GsGraphicsInteroperabiltyHandler::eColorWriteSlot:
 				case GsGraphicsInteroperabiltyHandler::eColorReadWriteSlot:
-					cudaBindSurfaceToArray( GvRendering::_colorSurface, imageArray );
+					GS_CUDA_SAFE_CALL(cudaBindSurfaceToArray( GvRendering::_colorSurface, imageArray ));
 					break;
 
 				case GsGraphicsInteroperabiltyHandler::eDepthReadSlot:
-					cudaBindTextureToArray( GvRendering::_inputDepthTexture, imageArray );
+					GS_CUDA_SAFE_CALL(cudaBindTextureToArray( GvRendering::_inputDepthTexture, imageArray ));
 					break;
 
 				case GsGraphicsInteroperabiltyHandler::eDepthWriteSlot:
 				case GsGraphicsInteroperabiltyHandler::eDepthReadWriteSlot:
-					cudaBindSurfaceToArray( GvRendering::_depthSurface, imageArray );
+					GS_CUDA_SAFE_CALL(cudaBindSurfaceToArray( GvRendering::_depthSurface, imageArray ));
 					break;
 
 				default:
@@ -590,7 +590,7 @@ bool GsRendererCUDA< TVolumeTreeType, TVolumeTreeCacheType, TSampleShader >
 		}
 	}
 
-	return false;
+	return true;
 }
 
 /******************************************************************************
@@ -626,7 +626,7 @@ bool GsRendererCUDA< TVolumeTreeType, TVolumeTreeCacheType, TSampleShader >
 			switch ( graphicsResourceSlot )
 			{
 				case GsGraphicsInteroperabiltyHandler::eColorReadSlot:
-					cudaUnbindTexture( GvRendering::_inputColorTexture );
+					GS_CUDA_SAFE_CALL(cudaUnbindTexture( GvRendering::_inputColorTexture ));
 					break;
 
 				case GsGraphicsInteroperabiltyHandler::eColorWriteSlot:
@@ -635,7 +635,7 @@ bool GsRendererCUDA< TVolumeTreeType, TVolumeTreeCacheType, TSampleShader >
 					break;
 
 				case GsGraphicsInteroperabiltyHandler::eDepthReadSlot:
-					cudaUnbindTexture( GvRendering::_inputDepthTexture );
+					GS_CUDA_SAFE_CALL(cudaUnbindTexture( GvRendering::_inputDepthTexture ));
 					break;
 
 				case GsGraphicsInteroperabiltyHandler::eDepthWriteSlot:
@@ -650,7 +650,7 @@ bool GsRendererCUDA< TVolumeTreeType, TVolumeTreeCacheType, TSampleShader >
 		}
 	}
 
-	return false;
+	return true;
 }
 
 } // namespace GvRendering

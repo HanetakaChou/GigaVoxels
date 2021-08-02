@@ -18,7 +18,7 @@
 #include <assimp/Importer.hpp> // C++ importer interface
 #include <assimp/scene.h> // Output data structure
 #include <assimp/postprocess.h> // Post processing flags
-#include <GL/glew.h>
+#include <GsGL/glew.h>
 #include <QDir>
 #include <QDirIterator>
 #include <vector>

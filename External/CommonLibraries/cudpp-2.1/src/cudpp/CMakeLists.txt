@@ -100,15 +100,15 @@ option(CUDPP_GENCODE_SM13
 
 option(CUDPP_GENCODE_SM20
        "ON to generate code for Compute Capability 2.0 devices (e.g. Tesla C2050)"
-       ON)
+       OFF)
 
 option(CUDPP_GENCODE_SM30
        "ON to generate code for Compute Capability 3.0 devices (e.g. Tesla K10)"
-	   ON)
+	   OFF)
 
 option(CUDPP_GENCODE_SM35
        "ON to generate code for Compute Capability 3.5 devices (e.g. Tesla K20)"
-	   ON)
+	   OFF)
 
 if (CUDPP_GENCODE_SM10)
   set(GENCODE ${GENCODE} ${GENCODE_SM10})

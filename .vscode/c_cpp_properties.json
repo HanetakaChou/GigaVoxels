@@ -1,0 +1,21 @@
+{
+    "configurations": [
+        {
+            "name": "Linux-Library",
+            "compileCommands": "${workspaceFolder}/Generated_Linux/Library/compile_commands.json"
+        },
+        {
+            "name": "Linux-Tools",
+            "compileCommands": "${workspaceFolder}/Generated_Linux/Tools/compile_commands.json"
+        },
+        {
+            "name": "Linux-Tutorials-Demos",
+            "compileCommands": "${workspaceFolder}/Generated_Linux/Tutorials/Demos/compile_commands.json"
+        },
+        {
+            "name": "Linux-Tutorials-ViewerPlugins",
+            "compileCommands": "${workspaceFolder}/Generated_Linux/Tutorials/ViewerPlugins/compile_commands.json"
+        }
+    ],
+    "version": 4
+}

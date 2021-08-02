@@ -10,11 +10,6 @@ cmake_minimum_required (VERSION 2.8) # needed to have the findCUDA module
 # Project
 #----------------------------------------------------------------
 
-# Invite message
-MESSAGE ( STATUS "-----------------------------------------------------" )
-MESSAGE ( STATUS "- PROJECT GENERATION : GigaSpace Demo Tutorials" )
-MESSAGE ( STATUS "-----------------------------------------------------" )
-
 # Project name
 project (DemoTutorials)
 
@@ -30,8 +25,8 @@ INCLUDE (GvSettings_CMakeImport)
 # Initialize some environment variables
 #----------------------------------------------------------------
 SET (RELEASE_BIN_DIR ${GV_RELEASE}/Bin)
-#SET (RELEASE_LIB_DIR ${GV_RELEASE}/Lib)
-#SET (RELEASE_INC_DIR ${GV_RELEASE}/Inc)
+SET (RELEASE_LIB_DIR ${GV_RELEASE}/Lib)
+SET (RELEASE_INC_DIR ${GV_RELEASE}/Inc)
 
 #########################################################################
 # Add all the sub projects

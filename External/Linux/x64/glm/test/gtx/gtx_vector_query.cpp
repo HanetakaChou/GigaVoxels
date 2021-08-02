@@ -7,8 +7,8 @@
 // File    : test/gtx/vector_query.cpp
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-#include <glm/glm.hpp>
-#include <glm/gtx/vector_query.hpp>
+#include <gsglm/glm.hpp>
+#include <gsglm/gtx/vector_query.hpp>
 
 int test_areCollinear()
 {

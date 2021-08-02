@@ -150,7 +150,7 @@ public:
 	 * @param pDataStructure data structure
 	 * @param pDataProductionManager data production manager
 	 */
-	virtual void initialize( TDataStructureType* pDataStructure, TDataProductionManager* pDataProductionManager );
+	virtual void initialize( GvStructure::GsIDataStructure* pDataStructure, GvStructure::GsIDataProductionManager* pDataProductionManager );
 
 	/**
 	 * Finalize

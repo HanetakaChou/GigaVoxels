@@ -9,9 +9,9 @@
 
 project (GvVoxelizer)
 
-MESSAGE (STATUS "")
-MESSAGE (STATUS "PROJECT : ${PROJECT_NAME}")
-MESSAGE (STATUS "")
+
+
+
 
 #----------------------------------------------------------------
 # Target yype

@@ -10,12 +10,6 @@ cmake_minimum_required (VERSION 2.8) # needed to have the findCUDA module
 # Project
 #----------------------------------------------------------------
 
-# Invite message
-MESSAGE (STATUS "")
-MESSAGE ( STATUS "-----------------------------------------------------" )
-MESSAGE ( STATUS "- PROJECT GENERATION : GigaVoxels Tools" )
-MESSAGE ( STATUS "-----------------------------------------------------" )
-
 # Project name
 project (Tools)
 
@@ -32,25 +26,12 @@ INCLUDE (GvSettings_CMakeImport)
 #########################################################################
 
 # Viewer
-# Invite message
-MESSAGE ( STATUS "" )
-MESSAGE ( STATUS "-----------------------------------------------------" )
-MESSAGE ( STATUS "- PROJECT GENERATION : Viewer Tools" )
-MESSAGE ( STATUS "-----------------------------------------------------" )
 add_subdirectory ("${CMAKE_SOURCE_DIR}/GigaVoxelsViewer")
 
 # Voxelizer
-MESSAGE ( STATUS "" )
-MESSAGE ( STATUS "-----------------------------------------------------" )
-MESSAGE ( STATUS "- PROJECT GENERATION : Voxelizer Tools" )
-MESSAGE ( STATUS "-----------------------------------------------------" )
 add_subdirectory ("${CMAKE_SOURCE_DIR}/GigaVoxelsVoxelizer")
 
 # Dicom Voxelizer
-MESSAGE ( STATUS "" )
-MESSAGE ( STATUS "-----------------------------------------------------" )
-MESSAGE ( STATUS "- PROJECT GENERATION : DicomVoxelizer Tools" )
-MESSAGE ( STATUS "-----------------------------------------------------" )
 IF (WIN32)
 	add_subdirectory ("${CMAKE_SOURCE_DIR}/GigaVoxelsDicomVoxelizer")
 ELSE ()

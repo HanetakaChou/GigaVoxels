@@ -7,8 +7,8 @@
 // File    : test/gtc/matrix_inverse.cpp
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_inverse.hpp>
+#include <gsglm/glm.hpp>
+#include <gsglm/gtc/matrix_inverse.hpp>
 
 int main()
 {

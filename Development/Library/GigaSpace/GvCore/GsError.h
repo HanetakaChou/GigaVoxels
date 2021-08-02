@@ -57,7 +57,7 @@
 #include <cuda_runtime.h>
 
 // OpenGL
-#include <GL/glew.h>
+#include <GsGL/glew.h>
 #include <GL/gl.h>
 #include <GL/glu.h>
  
@@ -127,18 +127,17 @@ inline bool checkGLError( const char* pFile, const int pLine )
  * 
  * Call a Cuda method in a safe way (by checking error)
  */
-#define GS_CUDA_SAFE_CALL( call )													\
-{																					\
-    cudaError_t error = call;														\
-    if ( cudaSuccess != error )														\
-	{																				\
-		/* Write error info */														\
-		fprintf( stderr, "\nCuda error :\n\t- file : '%s' \n\t- line %i : %s",		\
-				__FILE__, __LINE__, cudaGetErrorString( error ) );					\
-																					\
-		/* Exit program */															\
-        exit( EXIT_FAILURE );														\
-    }																				\
+inline void GS_CUDA_SAFE_CALL(cudaError_t error)
+{
+	if (cudaSuccess != error)
+	{
+		/* Write error info */
+		fprintf(stderr, "\nCuda error :\n\t- file : '%s' \n\t- line %i : %s",
+				__FILE__, __LINE__, cudaGetErrorString(error));
+
+		/* Exit program */
+		exit(EXIT_FAILURE);
+	}
 }
 
 // TO DO : add a flag to Release mode to optimize code => no check

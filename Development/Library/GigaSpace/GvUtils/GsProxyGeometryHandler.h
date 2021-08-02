@@ -50,7 +50,7 @@
 #include "GvCore/GsCoreConfig.h"
 
 // OpenGL
-#include <GL/glew.h>
+#include <GsGL/glew.h>
 
 // CUDA
 #include <driver_types.h>
@@ -96,7 +96,7 @@ public:
 	/**
 	 * CUDA graphics resource
 	 */
-	struct cudaGraphicsResource* _d_vertices;	// TEST : à remettre en protected
+	struct cudaGraphicsResource* _d_vertices;	// TEST : ï¿½ remettre en protected
 
 	/**
 	 *

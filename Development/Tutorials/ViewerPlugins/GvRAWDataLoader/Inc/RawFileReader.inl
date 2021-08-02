@@ -239,7 +239,7 @@ bool RawFileReader< TType >::optimizedReadData()
 		// Allocate a buffer to store all data
 		// - BEWARE : only works if _dataResolution is maximum 1024 (2048 will fail due to max "unsigned int" limit)
 		const unsigned int nbValues = _dataResolution * _dataResolution * _dataResolution;
-		TType* _data = new TType[ nbValues ];
+		TType* _data = new  TType[ nbValues ];
 
 		// Read data file
 		// - open file

@@ -26,7 +26,7 @@
 #include "GvvPipelineInterfaceViewer.h"
 
 // Qwt
-#define GS_QWT_6_0
+// #define GS_QWT_6_0
 #include <qwt_thermo.h>
 
 // System

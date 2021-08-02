@@ -99,7 +99,7 @@ void RenderKernel( VolTreeKernelType volumeTree, GPUCacheType gpuCache )
 
 	// pixel position
 	uint2 pixelCoords;
-	uint2 blockPos;
+	// uint2 blockPos;
 	GvRendering::GsRendererKernel::initPixelCoords<BlockResolution>(Pid, /*blockPos,*/ pixelCoords);
 
 	CUDAPM_KERNEL_START_EVENT(pixelCoords, 0);
@@ -243,16 +243,16 @@ void RenderKernel( VolTreeKernelType volumeTree, GPUCacheType gpuCache )
 			//frameColor = make_uchar4((uchar)(boxInterMin * 255.f), 0, 0, 255);
 
 			// project the depth and check against the current one
-			float pixDepth = 1.0f;
+			// float pixDepth = 1.0f;
 			float VP = -fabsf(t * rayDirInTree.z);
 			//http://www.opengl.org/discussion_boards/ubbthreads.php?ubb=showflat&Number=234519&page=2
 			//clipZ = (VP * k_renderViewContext.frustumC + k_renderViewContext.frustumD) / -VP;
-			float clipZ = (VP * k_renderViewContext.frustumC + k_renderViewContext.frustumD) / -VP;
+			//float clipZ = (VP * k_renderViewContext.frustumC + k_renderViewContext.frustumD) / -VP;
 
-			if ( accCol.w > cOpacityDepthThreshold )
-			{
-				pixDepth=clamp((clipZ+1.0f)/2.0f, 0.0f, 1.0f);
-			}
+			//if ( accCol.w > cOpacityDepthThreshold )
+			//{
+			//	pixDepth=clamp((clipZ+1.0f)/2.0f, 0.0f, 1.0f);
+			//}
 
 			//frameDepth = GvCore::getFrameDepthIn(pixelCoords);
 			frameDepth = GvRendering::getInputDepth( pixelCoords );

@@ -84,7 +84,7 @@ inline HostProducer< TKernelProducerType, TDataStructureType, TDataProductionMan
  ******************************************************************************/
 template< typename TKernelProducerType, typename TDataStructureType, typename TDataProductionManager >
 inline void HostProducer< TKernelProducerType, TDataStructureType, TDataProductionManager >
-::initialize( TDataStructureType* pDataStructure, TDataProductionManager* pDataProductionManager )
+::initialize( GvStructure::GsIDataStructure* pDataStructure, GvStructure::GsIDataProductionManager* pDataProductionManager )
 {
 	// Call parent class
 	GvUtils::GvSimpleHostProducer< TKernelProducerType, TDataStructureType, TDataProductionManager >::initialize( pDataStructure, pDataProductionManager );

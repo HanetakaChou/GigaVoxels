@@ -9,8 +9,8 @@
 
 PROJECT (GvRayMapGenerator)
 
-MESSAGE (STATUS "")
-MESSAGE (STATUS "PROJECT : ${PROJECT_NAME}")
+
+
 
 #----------------------------------------------------------------
 # Target yype

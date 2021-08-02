@@ -7,9 +7,9 @@
 // File    : test/gtc/random.cpp
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-#include <glm/glm.hpp>
-#include <glm/gtc/random.hpp>
-#include <glm/gtc/epsilon.hpp>
+#include <gsglm/glm.hpp>
+#include <gsglm/gtc/random.hpp>
+#include <gsglm/gtc/epsilon.hpp>
 #include <iostream>
 
 int test_linearRand()

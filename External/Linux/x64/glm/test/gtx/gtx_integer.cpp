@@ -7,9 +7,9 @@
 // File    : test/gtx/gtx_integer.cpp
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-#include <glm/glm.hpp>
-#include <glm/gtc/epsilon.hpp>
-#include <glm/gtx/integer.hpp>
+#include <gsglm/glm.hpp>
+#include <gsglm/gtc/epsilon.hpp>
+#include <gsglm/gtx/integer.hpp>
 #include <cstdio>
 /*
 int test_floor_log2()

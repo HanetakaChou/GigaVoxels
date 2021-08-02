@@ -20,11 +20,12 @@
  ******************************************************************************/
 
 // OpenGL
-#include <GL/glew.h>
+#include <GsGL/glew.h>
 
 // Qt
 #include <QGLViewer/qglviewer.h>
 #include <QKeyEvent>
+#include <QGLViewer/manipulatedFrame.h>
 
 // Project
 #include "SampleCore.h"

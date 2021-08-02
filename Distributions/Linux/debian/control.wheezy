@@ -2,7 +2,7 @@ Source: gigaspace
 Section: devel
 Priority: standard
 Maintainer: Pascal Guehl <pascal.guehl@inria.fr>
-Build-Depends: debhelper (>= 9), qt4-dev-tools, libqt4-dev, libqt4-opengl-dev, libqglviewer-qt4-dev, freeglut3-dev, libmagick++-dev, libtinyxml-dev, libqwt-dev, cimg-dev, libassimp-dev, libglm-dev, unzip, cmake, nvidia-cuda-toolkit (>= 5), libdcmtk2-dev
+Build-Depends: debhelper (>= 9), cmake, nvidia-cuda-toolkit (>= 5), qtbase5-dev, libqt5opengl5-dev, libqglviewer-dev-qt5, freeglut3-dev, libmagick++-dev, libtinyxml-dev, libqwt-qt5-dev, cimg-dev, libassimp-dev
 Standards-Version: 3.9.3
 Homepage: http://artis.imag.fr/Membres/~Pascal.Guehl/
 
@@ -21,6 +21,6 @@ Description: Development header files for GigaVoxels
 
 Package: gigaspace-demo
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, libgigaspace, freeglut3, libqglviewer-qt4-2, libcudart4, libqwt6, libassimp3, libtinyxml2.6.2
+Depends: ${shlibs:Depends}, ${misc:Depends}, libgigaspace, freeglut3, libqglviewer-qt5-2, libcudart4, libqwt6, libassimp3, libtinyxml2.6.2
 Description: Demo for gigaspace.
  This package provides compiled examples for the gigaspace library.

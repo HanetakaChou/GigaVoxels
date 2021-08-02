@@ -7,8 +7,8 @@
 // File    : test/gtc/type_precision.cpp
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-#include <glm/glm.hpp>
-#include <glm/gtc/type_precision.hpp>
+#include <gsglm/glm.hpp>
+#include <gsglm/gtc/type_precision.hpp>
 
 static int test_scalar_size()
 {

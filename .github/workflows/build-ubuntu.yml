@@ -1,0 +1,24 @@
+name: Build Ubuntu
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        configuration: [debug, release]
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+      - name: install build depends
+        run: sudo ./Install/Linux/install_build_depends.sh
+      - name: pre-build ubuntu
+        run: ./Install/Linux/install.sh ${{matrix.configuration}} 
+      - name: build ubuntu
+        run: ./Install/Linux/build.sh ${{matrix.configuration}} 

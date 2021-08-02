@@ -50,7 +50,7 @@
 #include "GvCore/GsCoreConfig.h"
 
 // Cuda
-#include <host_defines.h>
+#include <cuda_runtime.h>
 
 /******************************************************************************
  ************************* DEFINE AND CONSTANT SECTION ************************

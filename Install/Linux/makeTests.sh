@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # Exit script on error
 set -e
 
@@ -15,4 +15,4 @@ mkdir -p $GV_ROOT/Generated_Linux/Tests
 
 # Generates standard UNIX makefiles
 cd $GV_ROOT/Generated_Linux/Tests
-cmake -G "Unix Makefiles" $GV_ROOT/Development/Tests
+cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON $GV_ROOT/Development/Tests
